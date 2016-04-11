@@ -3,9 +3,13 @@
   padding: 15px;
   margin: 0 auto;
 }
-.form-signin .form-signin-heading,
 .form-signin .checkbox {
   margin-bottom: 10px;
+}
+
+.form-signin .form-signin-heading {
+  font-size: 54px;
+  margin-bottom: 40px
 }
 .form-signin .checkbox {
   font-weight: normal;
