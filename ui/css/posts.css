@@ -5,7 +5,7 @@
 }
 
 .profile-picture {
-  margin: 10px;
+  margin: 10px 0;
 }
 
 .posts {
@@ -18,8 +18,12 @@
   margin: 10px 0;
 }
 
-.time {
+.time, .user-follower {
   margin-top: -5px;
   color: #999;
   font-size: 13px;
+}
+
+.post-meta {
+  margin-left: -50px;
 }
