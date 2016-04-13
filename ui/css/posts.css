@@ -1,4 +1,25 @@
-.posts .user-name p {
+.user-name {
   color: #000;
   font-size: 20px;
+  margin-top: 10px;
+}
+
+.profile-picture {
+  margin: 10px;
+}
+
+.posts {
+  margin-top: 50px;
+}
+
+.post-content {
+  color: #555;
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+.time {
+  margin-top: -5px;
+  color: #999;
+  font-size: 13px;
 }
