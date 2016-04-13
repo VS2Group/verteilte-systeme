@@ -1,0 +1,18 @@
+.profile-name {
+  font-weight: bold;
+}
+
+.profile img {
+  margin: -52px auto 0;
+  padding: 10px;
+  background: #fff;
+}
+
+.profile .info {
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+.profile .info-text {
+  margin: 15px 5px 20px;
+}
