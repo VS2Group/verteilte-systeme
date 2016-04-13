@@ -1,3 +1,6 @@
+.profile {
+  margin-top: 50px;
+}
 .profile-name {
   font-weight: bold;
 }
@@ -11,8 +14,10 @@
 .profile .info {
   font-weight: bold;
   margin-right: 10px;
+  color: #000;
 }
 
 .profile .info-text {
   margin: 15px 5px 20px;
+  color: #666;
 }
