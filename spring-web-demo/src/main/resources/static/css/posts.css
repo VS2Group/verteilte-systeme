@@ -1,0 +1,29 @@
+.user-name {
+  color: #000;
+  font-size: 20px;
+  margin-top: 20px;
+}
+
+.profile-picture {
+  margin: 10px 0;
+}
+
+.posts {
+  margin-top: 10px;
+}
+
+.post-content {
+  color: #555;
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+.time, .user-follower {
+  margin-top: -5px;
+  color: #999;
+  font-size: 13px;
+}
+
+.post-meta {
+  margin-left: -50px;
+}
