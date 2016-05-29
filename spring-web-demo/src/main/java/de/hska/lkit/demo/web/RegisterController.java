@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class RegisterController {
 
     @RequestMapping(value = "register")
-    public String showLogin(@ModelAttribute String exampleString, Model mode) {
+    public String showRegister(@ModelAttribute String exampleString, Model mode) {
         return "register";
     }
 }
