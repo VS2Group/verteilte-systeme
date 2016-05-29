@@ -38,14 +38,14 @@
 
           <div class="inner-cover">
 
-            <form class="form-signin">
-              <h1 class="form-signin-heading">Stuttr</h1>
+            <form class="form-signin" th:action="@{/login}" th:object="${user}" method="post">
+                <h1 class="form-signin-heading">Stuttr</h1>
 
               <label for="inputUserName" class="sr-only">Benutzername</label>
-              <input type="text" id="inputUserName" class="form-control" placeholder="Benutzername" required ="required"
+              <input type="text" th:field="*{username}" class="form-control" placeholder="Benutzername" required ="required"
                      autofocus="autofocus"/>
               <label for="inputPassword" class="sr-only">Passwort</label>
-              <input type="password" id="inputPassword" class="form-control" placeholder="Passwort" required="required"/>
+              <input type="password" th:field="*{password}" class="form-control" placeholder="Passwort" required="required"/>
               <div class="checkbox">
                 <label>
                   <input type="checkbox" value="remember-me"/> Angemeldet bleiben</label>

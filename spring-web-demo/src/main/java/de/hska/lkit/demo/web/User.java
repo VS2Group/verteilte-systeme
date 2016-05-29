@@ -32,4 +32,8 @@ public class User {
     public void setPassword(String password) {
         this.password = password;
     }
+
+    public String toString() {
+        return "id: {" + id + "}, username: {" + username + "}, password: {" + password + "}";
+    }
 }
