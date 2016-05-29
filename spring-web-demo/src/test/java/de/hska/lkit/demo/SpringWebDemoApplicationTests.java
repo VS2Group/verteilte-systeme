@@ -4,13 +4,13 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.test.context.web.WebAppConfiguration;
 
-import de.hska.lkit.demo.web.SpringWebDemoApplication;
+import de.hska.lkit.demo.web.StuttrApplication;
 
 import org.springframework.boot.test.SpringApplicationConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@SpringApplicationConfiguration(classes = SpringWebDemoApplication.class)
+@SpringApplicationConfiguration(classes = StuttrApplication.class)
 @WebAppConfiguration
 public class SpringWebDemoApplicationTests {
 
