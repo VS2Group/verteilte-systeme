@@ -13,20 +13,10 @@
     <title>Stuttr - Register</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="./css/bootstrap.min.css" rel="stylesheet"/>
+    <link th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}" rel="stylesheet" media="screen" />
+    <link th:href="@{/css/style.css}" href="/css/style.css" type="text/css" rel="stylesheet" />
 
-    <!-- Custom styles for this template -->
-    <link href="./css/style.css" rel="stylesheet"/>
-
-
-    <link href="./css/signin.css" rel="stylesheet"/>
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
-      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-    <link th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}"
-          rel="stylesheet" media="screen" />
+    <link th:href="@{/css/signin.css}" rel="stylesheet" media="screen" />
   </head>
 
   <body>
@@ -53,11 +43,11 @@
             <form class="form-signin">
               <h1 class="form-signin-heading">Stuttr</h1>
               <label for="inputUserName" class="sr-only">Benutzername</label>
-              <input type="email" id="inputUserName" class="form-control" placeholder="Benutzername" required autofocus>
+              <input type="email" id="inputUserName" class="form-control" placeholder="Benutzername" required="true" autofocus="true" />
               <label for="inputPassword" class="sr-only">Passwort</label>
-              <input type="password" id="inputPassword" class="form-control form-signin-middle" placeholder="Passwort" required>
+              <input type="password" id="inputPassword" class="form-control form-signin-middle" placeholder="Passwort" required="true" />
               <label for="inputPasswordRep" class="sr-only">Passwort wiederholen</label>
-              <input type="password" id="inputPasswordRep" class="form-control" placeholder="Passwort wiederholen" required>
+              <input type="password" id="inputPasswordRep" class="form-control" placeholder="Passwort wiederholen" required="true" />
 
               <button class="btn btn-lg btn-primary btn-block submit" type="submit">Registrieren</button>
             </form>
@@ -79,8 +69,7 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="./js/vendor/jquery.min.js"><\/script>')</script>
-    <script src="./js/bootstrap.min.js"></script>
+    <script th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+    <script th:src="@{/webjars/bootstrap/3.3.4/js/bootstrap.min.js}"></script>
   </body>
 </html>
