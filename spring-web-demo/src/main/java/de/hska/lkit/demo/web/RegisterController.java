@@ -19,7 +19,7 @@ import java.util.Enumeration;
 public class RegisterController {
 
     @RequestMapping(value = "register", method = RequestMethod.POST)
-    public String showRegister(@ModelAttribute UserRegister user, Model model) {
+    public String registerUser (@ModelAttribute UserRegister user, Model model) {
         if (!user.getPassword().equals(user.getPasswordRepeat())) {
             System.out.println("Wrong password!");
             model.addAttribute("error", "Passwords don't match");
@@ -32,7 +32,7 @@ public class RegisterController {
     }
 
     @RequestMapping(value = "register", method = RequestMethod.GET)
-    public String showlalala(@ModelAttribute UserRegister user) {
+    public String showRegister (@ModelAttribute UserRegister user) {
         return "register";
     }
 
