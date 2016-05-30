@@ -39,6 +39,11 @@
 			<scope>test</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-redis</artifactId>
+		</dependency>
+
 		<!--WebJars -->
 		<dependency>
 			<groupId>org.webjars</groupId>
@@ -51,7 +56,13 @@
 			<version>2.1.4</version>
 		</dependency>
 
+
+
 	</dependencies>
+
+
+
+
 	
 	<build>
 		<plugins>
