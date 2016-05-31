@@ -27,6 +27,8 @@
 
         <div class="cover-container">
 
+          <p th:text="( ${error} != null ? ${error} + '!' : '')"/>
+
           <div class="masthead clearfix">
             <div class="inner">
               <nav>
@@ -40,14 +42,17 @@
 
           <div class="inner-cover">
 
-            <form class="form-signin">
+            <form class="form-signin" th:action="@{/register}" th:object="${userRegister}" method="POST">
               <h1 class="form-signin-heading">Stuttr</h1>
-              <label for="inputUserName" class="sr-only">Benutzername</label>
-              <input type="email" id="inputUserName" class="form-control" placeholder="Benutzername" required="true" autofocus="true" />
-              <label for="inputPassword" class="sr-only">Passwort</label>
-              <input type="password" id="inputPassword" class="form-control form-signin-middle" placeholder="Passwort" required="true" />
-              <label for="inputPasswordRep" class="sr-only">Passwort wiederholen</label>
-              <input type="password" id="inputPasswordRep" class="form-control" placeholder="Passwort wiederholen" required="true" />
+              <label for="username" class="sr-only">Benutzername</label>
+              <input type="text" th:field="*{username}" class="form-control" placeholder="Benutzername"
+                     required="true" autofocus="true" />
+              <label for="username" class="sr-only">Passwort</label>
+              <input type="password" th:field="*{password}" class="form-control form-signin-middle"
+                     placeholder="Passwort" required="true" />
+              <label for="passwordRepeat" class="sr-only">Passwort wiederholen</label>
+              <input type="password" th:field="*{passwordRepeat}" class="form-control"
+                     placeholder="Passwort wiederholen" required="true" />
 
               <button class="btn btn-lg btn-primary btn-block submit" type="submit">Registrieren</button>
             </form>

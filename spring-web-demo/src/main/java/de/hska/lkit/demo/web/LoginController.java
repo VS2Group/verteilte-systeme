@@ -19,10 +19,11 @@ public class LoginController {
     }
 
     @RequestMapping(value = "login")
-    public String showLogin(@ModelAttribute User user, Model model) {
+    public String loginUser(@ModelAttribute User user, Model model) {
         if (user != null) {
             System.out.println("User tried to log in: " + user);
         }
         return "login";
     }
+
 }
