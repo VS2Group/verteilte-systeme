@@ -1,38 +1,59 @@
 \chapter{Konzeption und Gestaltung}
 
   \section{Anforderungen der Web Anwendung (Use Case Diagramm)}
-    \begin{center}
-      \includegraphics[width=1.0\linewidth]{usecase.jpg}
-    \end{center}
+      \begin{figure}[!htb]
+        \begin{center}
+          \includegraphics[width=1.0\linewidth]{usecase}
+          \caption{Diagramm zum Use Case der Web Anwendung}
+          \label{fig:Use Case Diagramm}
+        \end{center}
+      \end{figure}
 
 \newpage
   \section{Entwurf der Seitennavigation (Zustandsdiagramm)}
-    \begin{center}
-      \includegraphics[width=1.0\linewidth]{zustandsdiagramm.jpg}
-    \end{center}
+      \begin{figure}[!htb]
+        \begin{center}
+          \includegraphics[width=1.0\linewidth]{zustandsdiagramm}
+          \caption{Zustandsdiagramm der Web Anwendung}
+          \label{fig:Zustandsdiagramm}
+        \end{center}
+      \end{figure}
 
 \newpage
   \section{Mockups von Stuttr}
-    \begin{center}
-      \includegraphics[width=0.75\linewidth]{login}
-    \end{center}
+      \begin{figure}[!htb]
+        \begin{center}
+            \includegraphics[width=0.75\linewidth]{login}
+          \caption{Login Screen der Anwendung}
+          \label{fig:login}
+        \end{center}
+      \end{figure}
 
     Der erste Screen, den der User beim Ansteuern der Seite sieht, ist der Anmelden-Screen. \\
     Hier kann der User seine Login-Daten eingeben und sich damit anmelden. \\
     In der oberen Leiste kann der User zum Punkt „Registrieren“ navigieren, sollte er noch kein Konto haben. \\
     Anhand dieses einfachen Aufbaus erkennt man auch sehr schnell, dass nur registrierte Nutzer Posts anderer Nutzer sehen können.
 
-    \begin{center}
-      \includegraphics[width=0.75\linewidth]{register}
-    \end{center}
+\newpage
+    \begin{figure}[!htb]
+      \begin{center}
+          \includegraphics[width=0.75\linewidth]{register}
+        \caption{Registrieren Screen der Anwendung}
+        \label{fig:register}
+      \end{center}
+    \end{figure}
 
     Der Registrieren Screen ist so einfach wie möglich gehalten und ähnelt dem „Anmelden“ Screen absichtlich, damit dem User ein bekanntes Interface die Eingabe der Daten erleichtert. \\
     Verlangt werden lediglich Username, Passwort und zur Absicherung die Wiederholung des Passwortes.
 
 \newpage
-    \begin{center}
-      \includegraphics[width=0.9\linewidth]{show-profile}
-    \end{center}
+    \begin{figure}[!htb]
+      \begin{center}
+          \includegraphics[width=0.75\linewidth]{show-profile}
+        \caption{Profilansicht der Anwendung}
+        \label{fig:show-profile}
+      \end{center}
+    \end{figure}
 
     Die Profilansicht ist sehr einfach gehalten. In der linken Spalte sind Informationen über den User enthalten, in der rechten Spalte alle Posts (in chronologischer Reihenfolge).
 
@@ -47,36 +68,59 @@
     Zusätzlich kann man über den Button „Folgen“ dem User folgen, also dessen Posts abonnieren.
 
 \newpage
-    \begin{center}
-      \includegraphics[width=0.8\linewidth]{search}
-    \end{center}
+    \begin{figure}[!htb]
+      \begin{center}
+          \includegraphics[width=0.8\linewidth]{search}
+        \caption{Suchansicht der Anwendung}
+        \label{fig:search}
+      \end{center}
+    \end{figure}
 
     Die Suche wird über das Formular im Header-Bereich angesteuert. Hier kann der User einen anderen Usernamen eingeben und erhält die präsentierte Liste an anderen Usern. Um die Relevanz der Ergebnisse besser zu präsentieren, wird hier auch die Information, die ein User über sich hinterlegt hat, dargestellt, sowie die Anzahl an Followern.
 
-    \begin{center}
-      \includegraphics[width=0.8\linewidth]{all-posts}
-    \end{center}
+\newpage
+    \begin{figure}[!htb]
+      \begin{center}
+          \includegraphics[width=0.8\linewidth]{all-posts}
+        \caption{Ansicht aller Posts der Anwendung}
+        \label{fig:all-posts}
+      \end{center}
+    \end{figure}
 
     Um sich die Posts aller User anzeigen zu lassen, kann man im Header-Menü den Punkt „Alle Posts“ anwählen und man erhält eine Ansicht aller Posts – chronologisch sortiert.
 
 \newpage
-    \begin{center}
-      \includegraphics[width=0.8\linewidth]{my-stream}
-    \end{center}
+    \begin{figure}[!htb]
+      \begin{center}
+          \includegraphics[width=0.8\linewidth]{my-stream}
+        \caption{Ansicht \glqq Meines Streams\grqq der Anwendung}
+        \label{fig:my-stream}
+      \end{center}
+    \end{figure}
 
-    Der Stream umfasst alle Posts von Usern, denen gefolgt wird, sowie der eigenen Posts. Hier werden auch die eigenen Informationen dargestellt und und die Liste der Posts ist auch hier wieder chronologisch sortiert.
+    Der Stream umfasst alle Posts von Usern, denen gefolgt wird, sowie der eigenen Posts. Hier werden auch die eigenen Informationen dargestellt und die Liste der Posts ist auch hier wieder chronologisch sortiert.
 
-    \begin{center}
-      \includegraphics[width=0.75\linewidth]{my-streamResponsive}
-    \end{center}
+\newpage
+    \begin{figure}[!htb]
+      \begin{center}
+          \includegraphics[width=0.75\linewidth]{my-streamResponsive}
+        \caption{Responsive Ansicht \glqq Meines Streams\grqq der Anwendung}
+        \label{fig:my-streamResponsive}
+      \end{center}
+    \end{figure}
 
-    Das Interface ist responsive. Das heißt, es passt sich an das Gerät, auf dem es benutzt wird, an. Hier haben wir exemplarisch den Stream genommen um zu zeigen, dass die Inhalte skaliert dargestellt werden. Die Design-Elemente ähneln sich zwar, sind jedoch auf die einzelnen Geräte optimiert.
+    Das Interface ist responsive. Das heißt, es passt sich an das Gerät, auf dem es benutzt wird, an. Hier haben wir exemplarisch den Stream genommen, um zu zeigen, dass die Inhalte skaliert dargestellt werden. Die Design-Elemente ähneln sich zwar, sind jedoch auf die einzelnen Geräte optimiert.
 
 \newpage
   \section{Entwurf des Datenmodells auf Basis von Redis}
-  \begin{center}
-    \includegraphics[width=1.0\linewidth]{redisDatenstruktur.jpg}
-  \end{center}
+
+  \begin{figure}[!htb]
+    \begin{center}
+        \includegraphics[width=1.0\linewidth]{redisDatenstruktur}
+      \caption{Redis-Datenstruktur}
+      \label{fig:redisDatenstruktur}
+    \end{center}
+  \end{figure}
 
   Die Userdaten werden in Hashs mit einzigartigen IDs im Namen verwaltet: \\
   \texttt{HMSET user: UserID (Name name, Passwort passwort)}
