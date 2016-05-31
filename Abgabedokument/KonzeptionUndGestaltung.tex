@@ -1,0 +1,103 @@
+\chapter{Konzeption und Gestaltung}
+
+  \section{Anforderungen der Web Anwendung (Use Case Diagramm)}
+    \begin{center}
+      \includegraphics[width=1.0\linewidth]{usecase.jpg}
+    \end{center}
+
+\newpage
+  \section{Entwurf der Seitennavigation (Zustandsdiagramm)}
+    \begin{center}
+      \includegraphics[width=1.0\linewidth]{zustandsdiagramm.jpg}
+    \end{center}
+
+\newpage
+  \section{Mockups von Stuttr}
+    \begin{center}
+      \includegraphics[width=0.75\linewidth]{login.jpg}
+    \end{center}
+
+    Der erste Screen, den der User beim Ansteuern der Seite sieht, ist der Anmelden-Screen. \\
+    Hier kann der User seine Login-Daten eingeben und sich damit anmelden. \\
+    In der oberen Leiste kann der User zum Punkt „Registrieren“ navigieren, sollte er noch kein Konto haben. \\
+    Anhand dieses einfachen Aufbaus erkennt man auch sehr schnell, dass nur registrierte Nutzer Posts anderer Nutzer sehen können.
+
+    \begin{center}
+      \includegraphics[width=0.75\linewidth]{register.jpg}
+    \end{center}
+
+    Der Registrieren Screen ist so einfach wie möglich gehalten und ähnelt dem „Anmelden“ Screen absichtlich, damit dem User ein bekanntes Interface die Eingabe der Daten erleichtert. \\
+    Verlangt werden lediglich Username, Passwort und zur Absicherung die Wiederholung des Passwortes.
+
+\newpage
+    \begin{center}
+      \includegraphics[width=1.0\linewidth]{show-profile.jpg}
+    \end{center}
+
+    Die Profilansicht ist sehr einfach gehalten. In der linken Spalte sind Informationen über den User enthalten, in der rechten Spalte alle Posts (in chronologischer Reihenfolge).
+
+    Die Informationen des Users sind Folgende:
+    \begin{itemize}
+      \item Username
+      \item Userinformationen
+      \item Anzahl an Followern
+      \item Anzahl an Personen, denen der User folgt
+    \end{itemize}
+
+    Zusätzlich kann man über den Button „Folgen“ dem User folgen, also dessen Posts abonnieren.
+
+\newpage
+    \begin{center}
+      \includegraphics[width=0.8\linewidth]{search.jpg}
+    \end{center}
+
+    Die Suche wird über das Formular im Header-Bereich angesteuert. Hier kann der User einen anderen Usernamen eingeben und erhält die präsentierte Liste an anderen Usern. Um die Relevanz der Ergebnisse besser zu präsentieren, wird hier auch die Information, die ein User über sich hinterlegt hat, dargestellt, sowie die Anzahl an Followern.
+
+    \begin{center}
+      \includegraphics[width=0.8\linewidth]{all-posts.jpg}
+    \end{center}
+
+    Um sich die Posts aller User anzeigen zu lassen, kann man im Header-Menü den Punkt „Alle Posts“ anwählen und man erhält eine Ansicht aller Posts – chronologisch sortiert.
+
+\newpage
+    \begin{center}
+      \includegraphics[width=0.8\linewidth]{my-stream.jpg}
+    \end{center}
+
+    Der Stream umfasst alle Posts von Usern, denen gefolgt wird, sowie der eigenen Posts. Hier werden auch die eigenen Informationen dargestellt und und die Liste der Posts ist auch hier wieder chronologisch sortiert.
+
+    \begin{center}
+      \includegraphics[width=0.75\linewidth]{my-streamResponsive.jpg}
+    \end{center}
+
+    Das Interface ist responsive. Das heißt, es passt sich an das Gerät, auf dem es benutzt wird, an. Hier haben wir exemplarisch den Stream genommen um zu zeigen, dass die Inhalte skaliert dargestellt werden. Die Design-Elemente ähneln sich zwar, sind jedoch auf die einzelnen Geräte optimiert.
+
+\newpage
+  \section{Entwurf des Datenmodells auf Basis von Redis}
+  \begin{center}
+    \includegraphics[width=1.0\linewidth]{redisDatenstruktur.jpg}
+  \end{center}
+
+  Die Userdaten werden in Hashs mit einzigartigen IDs im Namen verwaltet: \\
+  \texttt{HMSET user: UserID (Name name, Passwort passwort)}
+
+  Zusätzlich wird die UserID in einem Hash mit dem Usernamen als key gespeichert, sodass ein User auch über seinen Namen gefunden werden kann: \\
+  \texttt{HSet users (name, id)}
+
+  Für jeden User werden außerdem noch zwei einzigartige Sorted-Sets erstellt, um die Following-Funktion umzusetzen: \\
+  \texttt{following: UserID (4123 time, 1234 time,4123 time…)} \\ ist ein Sorted-Set, das alle UserIDs und die Followingzeit der Nutzer enthält, denen der entsprechende User folgt.
+
+  \texttt{followers: UserID(6152 time, 1342 time, 4122 time…)} \\ ist ein Sorted-Set, das alle UserIDs und die Followerzeit der Nutzer enthält, die dem entsprechenden User folgen.
+  Für die Verwaltung der Kurznachrichten werden zwei weitere Datenstrukturen benötigt: \\
+  \texttt{posts: UserID (56232,56233…)} \\ ist eine Liste von einzigartigen PostIDs, welche die Timeline eines Nutzers repräsentiert.
+  Die Inhalte der Posts können wieder als Hash gespeichert werden, mit der einzigartigen PostID als Key und dem Inhalt als Value. \\Beispiel: \\
+  \texttt{HSet posts (1, Heute war ein cooler Tag)}
+
+\newpage
+  \subsubsection{Zusammenfassung:}
+  (Hash) user: UserID (Name name, Passwort passwort) \\
+  (Hash) users (Name, id) \\
+  (Sorted-Set) following: UserID (id, time) \\
+  (Sorted-Set) followers: UserID (id, time) \\
+  (List) posts: UserID (id) \\
+  (Hash) posts (id, text)
