@@ -18,11 +18,16 @@ public class LoginController {
         return "redirect:login";
     }
 
-    @RequestMapping(value = "login")
+    @RequestMapping(value = "login", method = RequestMethod.POST)
     public String loginUser(@ModelAttribute User user, Model model) {
         if (user != null) {
             System.out.println("User tried to log in: " + user);
         }
+        return "login";
+    }
+
+    @RequestMapping(value = "login", method = RequestMethod.GET)
+    public String showLoginForm(@ModelAttribute User user) {
         return "login";
     }
 

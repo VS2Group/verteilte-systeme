@@ -25,11 +25,6 @@ public class UserController {
         this.redisexample = redisexample;
     }
 
-    @RequestMapping(value = "/register", method = RequestMethod.GET)
-    public String addUser(@ModelAttribute User user) {
-        return "register";
-    }
-
     @RequestMapping(value = "/createtoby")
     public String saveUser(@ModelAttribute User user, Model model) {
 

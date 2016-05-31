@@ -1,7 +1,7 @@
 package de.hska.lkit.demo.web;
 
 
-import jdk.nashorn.tools.ShellFunctions;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -17,6 +17,8 @@ import java.util.Enumeration;
  */
 @Controller
 public class RegisterController {
+
+    public RegisterController(Persistency persistency) {}
 
     @RequestMapping(value = "register", method = RequestMethod.POST)
     public String registerUser (@ModelAttribute UserRegister user, Model model) {
