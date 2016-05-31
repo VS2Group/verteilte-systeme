@@ -28,13 +28,16 @@ public class Persistency {
     @Autowired
     public Persistency(StringRedisTemplate stringRedisTemplate) {
         this.stringRedisTemplate = stringRedisTemplate;
-        this.userid = new RedisAtomicLong("userid", stringRedisTemplate.getConnectionFactory());
+        this.redisStringHashOps = stringRedisTemplate.opsForHash();
+        this.redisStringListOps = stringRedisTemplate.opsForList();
+        this.redisStringSetOps = stringRedisTemplate.opsForSet();
+//        this.userid = new RedisAtomicLong("userid", stringRedisTemplate.getConnectionFactory());
     }
 
 
     public boolean createUser(User user) {
         String key = "user:" + user.getUsername();
-        redisStringHashOps.put(key, "id", userid.toString());
+        redisStringHashOps.put(key, "id", "12345");
         redisStringHashOps.put(key, "username", user.getUsername());
         redisStringHashOps.put(key, "password", user.getPassword());
 

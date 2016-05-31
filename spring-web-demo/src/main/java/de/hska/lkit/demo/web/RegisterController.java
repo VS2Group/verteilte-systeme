@@ -2,6 +2,7 @@ package de.hska.lkit.demo.web;
 
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,7 +19,12 @@ import java.util.Enumeration;
 @Controller
 public class RegisterController {
 
-    public RegisterController(Persistency persistency) {}
+    private Persistency persistency;
+
+    @Autowired
+    public RegisterController(Persistency persistency) {
+        this.persistency = persistency;
+    }
 
     @RequestMapping(value = "register", method = RequestMethod.POST)
     public String registerUser (@ModelAttribute UserRegister user, Model model) {
@@ -28,6 +34,7 @@ public class RegisterController {
             return "register";
 
         } else {
+            persistency.createUser(user);
             System.out.println("Passwords match");
         }
         return "register";
