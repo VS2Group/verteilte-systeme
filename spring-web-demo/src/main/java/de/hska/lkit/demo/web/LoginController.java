@@ -13,7 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class LoginController {
 
     @RequestMapping(value = "login")
-    public String showLogin(@ModelAttribute User user, Model mode) {
+    public String showLogin(@ModelAttribute User user, Model model) {
         return "login";
+    }
+
+    @RequestMapping(value = "/")
+    public String showMainPage(Model model) {
+        return "redirect:login";
     }
 }
