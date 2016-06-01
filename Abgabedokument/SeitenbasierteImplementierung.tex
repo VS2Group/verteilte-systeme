@@ -1,2 +1,54 @@
-\chapter{Seitenbasierte Implementierung}
-\section{Überblick über die Implementierung}
+\chapter{Seitenbasierte Implementierung --- Überblick}
+\section{Schnittstelle als Repository Bean}
+Ablauf der Implementierung
+\begin{enumerate}
+  \item Erstellen der Klasse RedisConfiguration. \\
+  Dort wird alles initialisiert, was für die Verbindung mit Redis notwendig ist, z. B. Host, Port, Passwort und das Redis Template.
+  \item Erstellen der Klasse Persistency. \\
+  Dies ist die Schnittstelle zwischen der Redis Datenbank und der Java Implementierung. \\
+  Folgende Funktionen werden bereitgestellt:
+  \begin{itemize}
+    \item Check, ob der User bereits in der Datenbank existiert.
+    \item Alle User in einer \texttt{List} anzeigen lassen.
+    \item Einen User der Datenbank hinzufügen.
+    \item Einen User anhand desselben Users aus der Datenbank zurückgeben.
+    \item Einen User anhand seines Usernames aus der Datenbank zurückgeben.
+    \item Einen Post in die Datenbank eintragen.
+    \item Einen User anhand einer \texttt{postId} finden und ihn zurückgeben.
+    \item Alle Posts eines Users anhand seines Usernamen zurückgeben.
+    \item Alle Posts aus der Datenbank zurückgeben lassen.
+    \item Einen Post anhand einer \texttt{Id} zurückgeben lassen.
+  \end{itemize}
+\end{enumerate}
+
+\newpage
+\section{Sessionverwaltung}
+\subsection{Registrierung}
+Der User kann sich registrieren, indem er einen Username und ein Passwort auswählt. Zur Sicherheit wird er aufgefordert, das Passwort zu wiederholen. \\
+Falls das wiederholte Passwort nicht mit dem zuvoreingebenen übereinstimmt, wird eine Fehlermeldung für den User ausgegeben und er wird neu auf die \texttt{Registrieren} Seite navigiert.
+Bei erfolgreicher Registrierung wird der User in die Datenbank eingetragen.
+
+\subsection{Login}
+Der User loggt sich mit seinem Username und Passwort ein. \\
+Fehlerbehandlung:
+\begin{itemize}
+  \item Wenn ein nicht registrierter User versucht sich anzumelden, wird eine Meldung ausgegeben, dass dieser nicht existiert.
+  \item Wenn ein registrierter User das falsche Passwort eingibt, wird ihm angezeigt, dass das Passwort falsch eingetragen wurde.
+\end{itemize}
+In beiden Fällen bleibt der User auf der \texttt{Login} Seite.
+Wenn der User sich erfolgreich einloggen konnte, wird eine neue Session angelegt.
+
+\subsection{Logout}
+Es gibt zwei Möglichkeiten des \texttt{Logouts}:
+\begin{enumerate}
+  \item Der User drückt aktiv auf die Schaltfläche \texttt{Logout}.
+  \item Der User wird automatisch nach 15 Minuten Inaktivität ausgeloggt.
+\end{enumerate}
+In beiden Fällen wird die Session geschlossen und der User wird auf die Seite \texttt{Login} navigiert und damit zum erneuten Anmelden aufgefordert.
+
+\newpage
+\section{Implementierung weiterer Features}
+\subsection{Anzeige von Nutzerprofilen und Timelines}
+\subsection{Post schreiben}
+\subsection{Folgen und Entfolgen}
+\subsection{Suche von Nutzern}
