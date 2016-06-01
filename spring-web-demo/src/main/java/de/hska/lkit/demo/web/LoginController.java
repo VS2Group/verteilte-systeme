@@ -33,6 +33,13 @@ public class LoginController {
         }
         if (persistency.userExists(user)) {
             User savedUser = persistency.getUser(user);
+            if (savedUser.getPassword().equals(user.getPassword())) {
+                System.out.println("Passwords correct. User will be logged in");
+            } else {
+                model.addAttribute("error", "Wrong password");
+                System.out.println("Login failed! Passwords don't match");
+            }
+
         } else {
             System.out.println("Login failed! User {" + user.getUsername() +"} doesn't exist.");
             model.addAttribute("error", "Login failed. User doesn't exist.");
