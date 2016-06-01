@@ -168,4 +168,38 @@ public class Persistency {
 
     }
 
+    public void follow(String usernameFollower, String usernameFollowing) {
+        String followerKey = "user:" + usernameFollower + ":following";
+        String followingKey ="user" + usernameFollowing + ":follower";
+
+        redisStringSetOps.add(followerKey, usernameFollowing);
+        redisStringSetOps.add(followingKey, usernameFollower);
+    }
+
+    public Set<String> getFollowerIds (String username){
+        Set<String> follower = new HashSet<>();
+        String followerKey = "user:" + username + ":follower";
+
+        if (redisStringSetOps.isMember("allusers", username) && redisStringSetOps.size(followerKey) != 0) {
+            follower.addAll(redisStringSetOps.members(followerKey));
+        }
+
+        return follower;
+
+    }
+
+    public Set<String> getFollowingIds (String username){
+        Set<String> following = new HashSet<>();
+        String followingKey = "user:" + username + ":following";
+        if (redisStringSetOps.isMember("allusers", username) && redisStringSetOps.size(followingKey) != 0) {
+            following.addAll(redisStringSetOps.members(followingKey));
+
+        }
+
+        return following;
+
+    }
+
+
+
 }
