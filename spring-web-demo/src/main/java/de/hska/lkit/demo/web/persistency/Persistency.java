@@ -213,24 +213,21 @@ public class Persistency {
 
     }
 
-    public List<String> searchUsers (String username){
+    public List<String> searchUsers (String searchTerm){
 
         Set<String> users =redisStringSetOps.members("allusers");
         List<String> usersFound = new ArrayList<>();
 
-
-
         for(String user: users){
-            String[] elementParts = user.split(":");
+            String username = user.split(":")[1];
 
-            if (elementParts[1].startsWith(username)){
-                usersFound.add(elementParts[1]);
+            if (username.startsWith(searchTerm)){
+                usersFound.add(username);
             }
 
         }
 
         return usersFound;
-
     }
 
 
