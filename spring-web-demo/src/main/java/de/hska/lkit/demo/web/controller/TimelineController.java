@@ -53,7 +53,6 @@ public class TimelineController {
             posts = persistency.findPostsForUser(profileUser.getUsername());
         }
 
-        System.out.println("Anzahl an Posts: " + posts.size());
         Set<String> following = persistency.getFollowingIds(profileUser.getUsername());
         Set<String> follower = persistency.getFollowerIds(profileUser.getUsername());
 
@@ -61,6 +60,8 @@ public class TimelineController {
 
         System.out.println("Am I following this user: " + isFollowingProfileUser);
 
+        model.addAttribute("posts", posts);
+        model.addAttribute("isFollowing", isFollowingProfileUser);
         model.addAttribute("pageuser", profileUser.getUsername());
         model.addAttribute("profilepicture", "/images/profile-pictures/" + profileUser.getProfilePicture());
         model.addAttribute("timeline", timeline);
