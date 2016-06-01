@@ -51,6 +51,10 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    public String getProfilePicture() {
+        return Integer.toString((this.getUsername().hashCode() % 150) + 1) + ".png";
+    }
+
     public String toString() {
         return "id: {" + id + "}, username: {" + username + "}, password: {" + password + "}";
     }
