@@ -60,4 +60,10 @@ public class LoginController {
         return "login";
     }
 
+    @RequestMapping(value ="logout")
+    public String logout(HttpSession session) {
+        session.removeAttribute("username");
+        return "redirect:login";
+    }
+
 }
