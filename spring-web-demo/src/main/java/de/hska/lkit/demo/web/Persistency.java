@@ -16,13 +16,15 @@ public class Persistency {
 
     private RedisAtomicLong userid;
 
+    private RedisAtomicLong postid;
+
     private StringRedisTemplate stringRedisTemplate;
 
     private HashOperations<String, String, String> redisStringHashOps;
-    private final ZSetOperations<String, String> redisStringSortedSetOps;
     private SetOperations<String, String> redisStringSetOps;
     private ListOperations<String, String> redisStringListOps;
     private ValueOperations<String, String> redisStringValueOps;
+    private ZSetOperations<String, String> redisStringSortedSetOps;
 
 
     @Autowired
@@ -33,6 +35,8 @@ public class Persistency {
         this.redisStringListOps = stringRedisTemplate.opsForList();
         this.redisStringValueOps = stringRedisTemplate.opsForValue();
         this.userid = new RedisAtomicLong("userid", stringRedisTemplate.getConnectionFactory());
+        this.postid = new RedisAtomicLong("postid", stringRedisTemplate.getConnectionFactory());
+
     }
 
     public boolean userExists(User user) {
@@ -74,4 +78,40 @@ public class Persistency {
             return null;
         }
     }
+
+    public void createPost(Post post, String username) {
+
+        // generate a unique id
+        long realID = postid.incrementAndGet();
+        String id = String.valueOf(realID);
+        post.setId(id);
+
+
+        String key = "posts:" + id;
+        redisStringHashOps.put(key, "id", id);
+        redisStringHashOps.put(key, "content", post.getContent());
+        redisStringHashOps.put(key, "date", String.valueOf(post.getDate().getTime()));
+
+        redisStringSortedSetOps.add("allposts:", id, realID);
+
+        String userPostsKey = "user:" + username + ":posts";
+        redisStringListOps.rightPush(userPostsKey, id);
+
+        String postToUserKey = "posts:" + id + ":user";
+        redisStringValueOps.append(postToUserKey, username);
+    }
+
+
+    public User findUserForPost(String postid) {
+
+        String postToUserKey = "posts:" + postid + ":user";
+        String username = redisStringValueOps.get(postToUserKey);
+        return getUser(new User(0, username, null));
+    }
+
+    public List<String> findPostsForUser(String username) {
+
+        return null;
+    }
+
 }

@@ -1,9 +1,11 @@
 package de.hska.lkit.demo.web;
 
+import java.io.Serializable;
+
 /**
  * Created by Tobias Kerst on 29.05.2016.
  */
-public class User {
+public class User implements Serializable {
 
     public User (long id, String username, String password) {
 
