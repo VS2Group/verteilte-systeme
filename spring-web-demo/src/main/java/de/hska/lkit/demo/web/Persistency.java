@@ -121,8 +121,49 @@ public class Persistency {
     }
 
     public List<String> findPostsForUser(String username) {
+        List<String> posts = new LinkedList<>();
+        String userPostsKey = "user:" + username + ":posts";
 
-        return null;
+
+        if (redisStringSetOps.isMember("allusers", username) && redisStringListOps.size(userPostsKey) != 0) {
+            posts.addAll(redisStringSetOps.members(userPostsKey));
+        }
+
+        return posts;
+
+    }
+
+     public List<Post> findGlobalPosts(long start, long end) {
+        List<Post> posts = new LinkedList<>();
+
+		Long postCount = redisStringSortedSetOps.zCard("alleposts:");
+
+
+        Set<String> postIDs = redisStringSortedSetOps.range("alleposts:", start, end);
+
+        for (String id : postIDs) {
+
+            int intid = Integer.parseInt(id);
+
+            posts.add(findPostWithId(intid));
+        }
+        return posts;
+    }
+
+    public Post findPostWithId (int id){
+
+        Post post = new Post();
+        String key = "posts" + id;
+
+        post.setId(redisStringHashOps.get(key, "id"));
+        post.setContent(redisStringHashOps.get(key, "content"));
+        post.setDate(new Date(Long.valueOf(redisStringHashOps.get(key, "date"))));
+
+        if (null == post.getContent() || post.getContent().isEmpty())
+            return null;
+
+        return post;
+
     }
 
 }
