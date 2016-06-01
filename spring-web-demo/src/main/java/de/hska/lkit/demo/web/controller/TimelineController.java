@@ -56,7 +56,7 @@ public class TimelineController {
         Set<String> following = persistency.getFollowingIds(profileUser.getUsername());
         Set<String> follower = persistency.getFollowerIds(profileUser.getUsername());
 
-        boolean isFollowingProfileUser = following.contains(profileUser.getUsername());
+        boolean isFollowingProfileUser = follower.contains(profileUser.getUsername());
 
         System.out.println("Am I following this user: " + isFollowingProfileUser);
 
@@ -65,10 +65,10 @@ public class TimelineController {
         model.addAttribute("pageuser", profileUser.getUsername());
         model.addAttribute("profilepicture", "/images/profile-pictures/" + profileUser.getProfilePicture());
         model.addAttribute("timeline", timeline);
-        model.addAttribute("followerCounter", follower.size() + " folge " +
-                "ich");
+        model.addAttribute("followerCounter", follower.size() + " folgen " +
+                "mir");
         model.addAttribute("followingCounter", following.size() + " " +
-                "folgen mir");
+                "folge ich");
         return "my-stream";
     }
 
@@ -78,7 +78,7 @@ public class TimelineController {
 
     @RequestMapping(value = "/timeline", method = RequestMethod.GET)
     public String showTimeline(@ModelAttribute Timeline timeline, HttpSession session,
-                                   Model model) {
+                               Model model) {
         if (session == null || session.getAttribute("username") == null) {
             return "redirect:./login";
         }
@@ -91,7 +91,7 @@ public class TimelineController {
 
     @RequestMapping(value = "/follow/{username}")
     public String followUser(@PathVariable("username") String username, @ModelAttribute Timeline timeline,
-                                   Model model, HttpSession session) {
+                             Model model, HttpSession session) {
 
         if (session == null || session.getAttribute("username") == null) {
             return "redirect:../login";
