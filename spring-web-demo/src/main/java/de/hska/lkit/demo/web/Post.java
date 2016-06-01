@@ -14,6 +14,9 @@ public class Post implements Serializable {
     private Date date;
 
     public Post() {
+        content = new String();
+        userName = new String();
+        date = new Date();
     }
 
     public int getId() {

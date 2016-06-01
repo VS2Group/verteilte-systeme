@@ -27,12 +27,29 @@ public class PostController {
 
 
     @RequestMapping(value = "/create-post", method = RequestMethod.GET)
-    public String showUserTimeline(HttpSession session, Model model) {
+    public String showPostForm(@ModelAttribute Post post, HttpSession session, Model model) {
         if (session == null || session.getAttribute("username") == null) {
             return "redirect:./login";
         }
 
+        if (post == null) {
+            System.out.println("Post object is null");
+            post = new Post();
+        }
+
         String username = session.getAttribute("username").toString();
         return "create-post";
+    }
+
+    @RequestMapping(value = "/create-post", method = RequestMethod.POST)
+    public String createPost(@ModelAttribute Post post, HttpSession session, Model model) {
+        if (session == null || session.getAttribute("username") == null) {
+            return "redirect:./login";
+        }
+        String username = session.getAttribute("username").toString();
+
+        persistency.createPost(post, username);
+        System.out.println("Post created by user {" + username + "}: " + post.getContent());
+        return "redirect:./timeline";
     }
 }
