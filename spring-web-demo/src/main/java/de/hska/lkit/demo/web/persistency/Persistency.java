@@ -109,6 +109,7 @@ public class Persistency {
 
         String userPostsKey = "user:" + username + ":posts";
         redisStringListOps.rightPush(userPostsKey, id);
+        redisStringSetOps.add(userPostsKey, id);
 
         String postToUserKey = "posts:" + id + ":user";
         redisStringValueOps.append(postToUserKey, username);
