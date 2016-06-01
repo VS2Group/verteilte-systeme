@@ -71,12 +71,23 @@ public class Persistency {
 
     public User getUser(User user) {
         User savedUser = new User();
+        String key = "user:" + user.getUsername();
+
         if (userExists(user)) {
-            // TODO: Create user object from the data in the redis database.
+            savedUser.setId(Long.parseLong(redisStringHashOps.get(key, "id")));
+            savedUser.setUsername(redisStringHashOps.get(key, "username"));
+            savedUser.setPassword(redisStringHashOps.get(key, "password"));
             return savedUser;
+
         } else {
             return null;
         }
+    }
+
+    public User getUser (String username){
+        User user = new User();
+        user.setUsername(username);
+        return getUser(user);
     }
 
     public void createPost(Post post, String username) {
@@ -106,7 +117,7 @@ public class Persistency {
 
         String postToUserKey = "posts:" + postid + ":user";
         String username = redisStringValueOps.get(postToUserKey);
-        return getUser(new User(0, username, null));
+        return getUser(username);
     }
 
     public List<String> findPostsForUser(String username) {

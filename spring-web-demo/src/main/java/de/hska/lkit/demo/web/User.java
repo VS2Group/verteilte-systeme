@@ -7,6 +7,11 @@ import java.io.Serializable;
  */
 public class User implements Serializable {
 
+    private long id;
+    private String username;
+    private String password;
+    private static final long serialVersionUID = 1L;
+
     public User (long id, String username, String password) {
 
         this.id=id;
@@ -20,9 +25,7 @@ public class User implements Serializable {
 
 
 
-    private long id;
-    private String username;
-    private String password;
+
 
     public long getId() {
         return id;
