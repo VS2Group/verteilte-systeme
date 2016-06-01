@@ -36,17 +36,13 @@ public class LoginController {
             return "login";
         }
 
-        if (session.getAttribute("Toby") == null) {
-            System.out.println("No Session");
-        } else {
-            System.out.println("Sessions exists");
-        }
-        session.setAttribute("Toby", "magInsgeheimDieLenaGanzDolle");
 
         if (persistency.userExists(user)) {
             User savedUser = persistency.getUser(user);
             if (savedUser.getPassword().equals(user.getPassword())) {
+                session.setAttribute("username", user.getUsername());
                 System.out.println("Passwords correct. User will be logged in");
+                return "redirect:timeline";
             } else {
                 model.addAttribute("error", "Wrong password");
                 System.out.println("Login failed! Passwords don't match");
