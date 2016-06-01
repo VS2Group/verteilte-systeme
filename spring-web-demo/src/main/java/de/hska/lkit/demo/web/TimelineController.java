@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.w3c.dom.html.HTMLAnchorElement;
 
+import javax.servlet.http.HttpSession;
 import java.util.Date;
 
 @Controller
@@ -36,15 +38,17 @@ public class TimelineController {
     }
 
     @RequestMapping(value = "/timeline", method = RequestMethod.GET)
-    public String showUserTimeline(@ModelAttribute Timeline timeline,
+    public String showUserTimeline(@ModelAttribute Timeline timeline, HttpSession session,
                                    Model model) {
-
+        if (session == null || session.getAttribute("username") == null) {
+            return "redirect:login";
+        }
+        String username = session.getAttribute("username").toString();
+        System.out.println("Username in session: {" + username + "}");
 
         model.addAttribute("timeline", timeline);
         return "all-posts";
     }
-
-
 
 
 }
