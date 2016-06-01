@@ -41,6 +41,7 @@ public class LoginController {
             User savedUser = persistency.getUser(user);
             if (savedUser.getPassword().equals(user.getPassword())) {
                 session.setAttribute("username", user.getUsername());
+                session.setMaxInactiveInterval(15*60);
                 System.out.println("Passwords correct. User will be logged in");
                 return "redirect:timeline";
             } else {
