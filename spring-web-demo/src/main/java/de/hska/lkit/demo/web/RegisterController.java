@@ -34,8 +34,14 @@ public class RegisterController {
             return "register";
 
         } else {
-            persistency.createUser(user);
             System.out.println("Passwords match");
+            if (!persistency.userExists(user)) {
+                persistency.createUser(user);
+                System.out.println("User with name {" + user.getUsername() + "} created.");
+            } else {
+                model.addAttribute("error", "User already exists");
+                System.out.println("User with username {" + user.getUsername() + "} already exists");
+            }
         }
         return "register";
     }

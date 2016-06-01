@@ -1,6 +1,7 @@
 package de.hska.lkit.demo.web;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -13,6 +14,13 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class LoginController {
 
+    private final Persistency persistency;
+
+    @Autowired
+    LoginController(Persistency persistency) {
+        this.persistency = persistency;
+    }
+
     @RequestMapping(value = "/")
     public String showMainPage(Model model) {
         return "redirect:login";
@@ -20,8 +28,14 @@ public class LoginController {
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
     public String loginUser(@ModelAttribute User user, Model model) {
-        if (user != null) {
-            System.out.println("User tried to log in: " + user);
+        if (user == null) {
+            return "login";
+        }
+        if (persistency.userExists(user)) {
+            User savedUser = persistency.getUser(user);
+        } else {
+            System.out.println("Login failed! User {" + user.getUsername() +"} doesn't exist.");
+            model.addAttribute("error", "Login failed. User doesn't exist.");
         }
         return "login";
     }
