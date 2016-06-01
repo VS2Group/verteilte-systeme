@@ -13,7 +13,8 @@ public class Post implements Serializable {
     private String userName;
     private Date date;
 
-    public Post() {}
+    public Post() {
+    }
 
     public int getId() {
         return id;
@@ -49,6 +50,24 @@ public class Post implements Serializable {
 
     public void setTimestamp(Date date) {
         this.date = date;
+    }
+
+    @Override
+    public int hashCode() {
+        return id + 37 + content.hashCode() + userName.hashCode() + date.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object otherPost) {
+        if (!(otherPost instanceof Post)) {
+            return false;
+        }
+        Post other = (Post) otherPost;
+
+        return (other.getId() == this.id && other.getContent().equals(this.content)
+                && other.getDate() == this.date && other.getUserName().equals(this.userName));
+
+
     }
 
 }
