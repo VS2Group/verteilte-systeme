@@ -30,9 +30,11 @@ public class TimelineController {
 
     @RequestMapping(value = "/timeline/{username}", method = RequestMethod.GET)
     public String showUserTimeline(@PathVariable("username") String username, @ModelAttribute Timeline timeline,
-                                   Model model) {
+                                   Model model, HttpSession session) {
 
-
+        if (session == null || session.getAttribute("username") == null) {
+            return "redirect:../login";
+        }
         model.addAttribute("timeline", timeline);
         return "my-stream";
     }
@@ -41,7 +43,7 @@ public class TimelineController {
     public String showUserTimeline(@ModelAttribute Timeline timeline, HttpSession session,
                                    Model model) {
         if (session == null || session.getAttribute("username") == null) {
-            return "redirect:login";
+            return "redirect:./login";
         }
         String username = session.getAttribute("username").toString();
         System.out.println("Username in session: {" + username + "}");
