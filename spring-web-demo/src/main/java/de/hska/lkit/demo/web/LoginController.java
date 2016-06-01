@@ -2,11 +2,15 @@ package de.hska.lkit.demo.web;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * Created by Tobias Kerst on 29.05.2016.
@@ -27,10 +31,18 @@ public class LoginController {
     }
 
     @RequestMapping(value = "login", method = RequestMethod.POST)
-    public String loginUser(@ModelAttribute User user, Model model) {
+    public String loginUser(@ModelAttribute User user, HttpSession session, Model model) {
         if (user == null) {
             return "login";
         }
+
+        if (session.getAttribute("Toby") == null) {
+            System.out.println("No Session");
+        } else {
+            System.out.println("Sessions exists");
+        }
+        session.setAttribute("Toby", "magInsgeheimDieLenaGanzDolle");
+
         if (persistency.userExists(user)) {
             User savedUser = persistency.getUser(user);
             if (savedUser.getPassword().equals(user.getPassword())) {
