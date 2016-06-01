@@ -122,7 +122,7 @@ public class Persistency {
         return getUser(username);
     }
 
-    public List<String> findPostsForUser(String username) {
+    public List<String> findPostIdsForUser(String username) {
         List<String> posts = new LinkedList<>();
         String userPostsKey = "user:" + username + ":posts";
 
@@ -132,7 +132,15 @@ public class Persistency {
         }
 
         return posts;
+    }
 
+    public List<Post> findPostsForUser(String username) {
+        List<String> postIds = findPostIdsForUser(username);
+        List<Post> posts = new ArrayList<>();
+        for (String postId : postIds) {
+            posts.add(findPostWithId(Integer.parseInt(postId)));
+        }
+        return posts;
     }
 
      public List<Post> findGlobalPosts(long start, long end) {

@@ -4,6 +4,7 @@ package de.hska.lkit.demo.web.controller;
  * Created by patrickkoenig on 01.06.16.
  */
 
+import de.hska.lkit.demo.web.model.post.Post;
 import de.hska.lkit.demo.web.model.user.User;
 import de.hska.lkit.demo.web.persistency.Persistency;
 import de.hska.lkit.demo.web.model.timeline.Timeline;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 import java.util.Set;
 
 @Controller
@@ -40,16 +42,24 @@ public class TimelineController {
 
         User profileUser = new User();
 
+        List<Post> posts;
         if (isMyStream(username)) {
             profileUser.setUsername(session.getAttribute("username").toString());
             model.addAttribute("streamName", "My Stream");
+            posts = persistency.findPostsForUser(profileUser.getUsername());
         } else {
             profileUser.setUsername(username);
             model.addAttribute("streamName", "von " + username);
+            posts = persistency.findPostsForUser(profileUser.getUsername());
         }
 
+        System.out.println("Anzahl an Posts: " + posts.size());
         Set<String> following = persistency.getFollowingIds(profileUser.getUsername());
         Set<String> follower = persistency.getFollowerIds(profileUser.getUsername());
+
+        boolean isFollowingProfileUser = following.contains(profileUser.getUsername());
+
+        System.out.println("Am I following this user: " + isFollowingProfileUser);
 
         model.addAttribute("pageuser", profileUser.getUsername());
         model.addAttribute("profilepicture", "/images/profile-pictures/" + profileUser.getProfilePicture());
