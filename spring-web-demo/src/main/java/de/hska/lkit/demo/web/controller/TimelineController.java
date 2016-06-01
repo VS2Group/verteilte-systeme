@@ -4,6 +4,7 @@ package de.hska.lkit.demo.web.controller;
  * Created by patrickkoenig on 01.06.16.
  */
 
+import de.hska.lkit.demo.web.model.user.User;
 import de.hska.lkit.demo.web.persistency.Persistency;
 import de.hska.lkit.demo.web.model.timeline.Timeline;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,8 +36,25 @@ public class TimelineController {
         if (session == null || session.getAttribute("username") == null) {
             return "redirect:../login";
         }
+
+        User profileUser = new User();
+
+        if (isMyStream(username)) {
+            profileUser.setUsername(session.getAttribute("username").toString());
+            model.addAttribute("streamName", "My Stream");
+        } else {
+            profileUser.setUsername(username);
+            model.addAttribute("streamName", "von " + username);
+        }
+
+        model.addAttribute("pageuser", profileUser.getUsername());
+        model.addAttribute("profilepicture", "/images/profile-pictures/" + profileUser.getProfilePicture());
         model.addAttribute("timeline", timeline);
         return "my-stream";
+    }
+
+    private boolean isMyStream(@PathVariable("username") String username) {
+        return (username.equals("my-stream"));
     }
 
     @RequestMapping(value = "/timeline", method = RequestMethod.GET)

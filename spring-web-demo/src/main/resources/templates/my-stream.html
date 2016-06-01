@@ -62,16 +62,17 @@
       <div class="row">
         <div class="col-sm-6 col-md-4">
           <div class="thumbnail profile">
-            <img th:src="@{/images/profile-pictures/3.png}" alt="profile-pic" class="img-circle" />
+            <img th:src="${profilepicture}" alt="profile-pic" class="img-circle" />
             <div class="caption">
               <div class="row">
                 <div class="col-xs-7">
-                  <h3 class="profile-name">@TobsCore</h3>
+                  <h3 class="profile-name">@<span th:text="${pageuser}"></span></h3>
                 </div>
                 <div class="col-xs-5">
                 </div>
               </div>
-              <p class="info-text"><span class="info">Info:</span>Professionally foster professional innovation for emerging customer service. Uniquely enable enterprise materials before high-quality methods of empowerment. Synergistically deploy web-enabled e-commerce and cross-unit meta-services.</p>
+              <p class="info-text"><span class="info">Info:</span>Dieser User hat keine Angaben zu seinem Status
+                gemacht.</p>
             </div>
           </div>
 
@@ -87,7 +88,7 @@
         <div class="col-sm-6">
           <div class="posts">
             <div class="page-header">
-              <h1>Posts <small>Mein Stream</small></h1>
+              <h1>Posts <small th:text="${streamName}"></small></h1>
             </div>
 
             <div class="post thumbnail">

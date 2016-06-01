@@ -60,7 +60,7 @@ public class User implements Serializable {
     }
 
     public String getProfilePicture() {
-        return Integer.toString((this.getUsername().hashCode() % 150) + 1) + ".png";
+        return Integer.toString(Math.abs((this.getUsername().hashCode()) % 150) + 1) + ".png";
     }
 
     public String toString() {
