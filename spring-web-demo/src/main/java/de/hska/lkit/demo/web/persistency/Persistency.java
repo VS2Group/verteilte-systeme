@@ -109,7 +109,7 @@ public class Persistency {
 
         String userPostsKey = "user:" + username + ":posts";
         redisStringListOps.rightPush(userPostsKey, id);
-        redisStringSetOps.add(userPostsKey, id);
+
 
         String postToUserKey = "posts:" + id + ":user";
         redisStringValueOps.append(postToUserKey, username);
@@ -128,8 +128,9 @@ public class Persistency {
         String userPostsKey = "user:" + username + ":posts";
 
 
-        if (redisStringSetOps.isMember("allusers", username) && redisStringListOps.size(userPostsKey) != 0) {
-            posts.addAll(redisStringSetOps.members(userPostsKey));
+        if (redisStringSetOps.isMember("allusers", "user:" + username) && redisStringListOps.size(userPostsKey) != 0) {
+            System.out.println("In der Funktion");
+            posts.addAll(redisStringListOps.range(userPostsKey,0,-1));
         }
 
         return posts;
@@ -168,7 +169,10 @@ public class Persistency {
 
         post.setId(redisStringHashOps.get(key, "id"));
         post.setContent(redisStringHashOps.get(key, "content"));
-        post.setDate(new Date(Long.valueOf(redisStringHashOps.get(key, "date"))));
+        String date = redisStringHashOps.get(key, "date");
+        if(date != null) {
+            post.setDate(new Date(Long.valueOf(date)));
+        }
 
         if (null == post.getContent() || post.getContent().isEmpty())
             return null;
@@ -189,7 +193,7 @@ public class Persistency {
         Set<String> follower = new HashSet<>();
         String followerKey = "user:" + username + ":follower";
 
-        if (redisStringSetOps.isMember("allusers", username) && redisStringSetOps.size(followerKey) != 0) {
+        if (redisStringSetOps.isMember("allusers", "user:" + username) && redisStringSetOps.size(followerKey) != 0) {
             follower.addAll(redisStringSetOps.members(followerKey));
         }
 
@@ -200,7 +204,7 @@ public class Persistency {
     public Set<String> getFollowingIds (String username){
         Set<String> following = new HashSet<>();
         String followingKey = "user:" + username + ":following";
-        if (redisStringSetOps.isMember("allusers", username) && redisStringSetOps.size(followingKey) != 0) {
+        if (redisStringSetOps.isMember("allusers", "user:" + username) && redisStringSetOps.size(followingKey) != 0) {
             following.addAll(redisStringSetOps.members(followingKey));
 
         }

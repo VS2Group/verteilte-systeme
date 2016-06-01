@@ -28,7 +28,9 @@ public class Post implements Serializable {
     }
 
     public void setId(String id) {
-        this.id = Integer.parseInt(id);
+        if(id!= null) {
+            this.id = Integer.parseInt(id);
+        }
     }
 
     public String getContent() {
