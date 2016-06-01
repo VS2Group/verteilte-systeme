@@ -48,7 +48,7 @@ public class Post implements Serializable {
         return date;
     }
 
-    public void setTimestamp(Date date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

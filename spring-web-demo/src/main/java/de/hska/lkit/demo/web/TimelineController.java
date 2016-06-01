@@ -3,7 +3,48 @@ package de.hska.lkit.demo.web;
 /**
  * Created by patrickkoenig on 01.06.16.
  */
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.util.Date;
+
+@Controller
 public class TimelineController {
+
+
+    private Persistency persistency;
+
+    @Autowired
+    public TimelineController(Persistency persistency) {
+        this.persistency = persistency;
+    }
+
+
+    @RequestMapping(value = "/timeline/{username}", method = RequestMethod.GET)
+    public String showUserTimeline(@PathVariable("username") String username, @ModelAttribute Timeline timeline,
+                                   Model model) {
+
+
+        model.addAttribute("timeline", timeline);
+        return "my-stream";
+    }
+
+    @RequestMapping(value = "/timeline", method = RequestMethod.GET)
+    public String showUserTimeline(@ModelAttribute Timeline timeline,
+                                   Model model) {
+
+
+        model.addAttribute("timeline", timeline);
+        return "all-posts";
+    }
+
+
 
 
 }
