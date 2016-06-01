@@ -170,7 +170,7 @@ public class Persistency {
 
     public void follow(String usernameFollower, String usernameFollowing) {
         String followerKey = "user:" + usernameFollower + ":following";
-        String followingKey ="user" + usernameFollowing + ":follower";
+        String followingKey ="user:" + usernameFollowing + ":follower";
 
         redisStringSetOps.add(followerKey, usernameFollowing);
         redisStringSetOps.add(followingKey, usernameFollower);
@@ -197,6 +197,26 @@ public class Persistency {
         }
 
         return following;
+
+    }
+
+    public List<String> searchUsers (String username){
+
+        Set<String> users =redisStringSetOps.members("allusers");
+        List<String> usersFound = new ArrayList<>();
+
+
+
+        for(String user: users){
+            String[] elementParts = user.split(":");
+
+            if (elementParts[1].startsWith(username)){
+                usersFound.add(elementParts[1]);
+            }
+
+        }
+
+        return usersFound;
 
     }
 
