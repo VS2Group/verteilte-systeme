@@ -1,9 +1,11 @@
-package de.hska.lkit.demo.web;
+package de.hska.lkit.demo.web.controller;
 
 /**
  * Created by patrickkoenig on 01.06.16.
  */
 
+import de.hska.lkit.demo.web.persistency.Persistency;
+import de.hska.lkit.demo.web.model.timeline.Timeline;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,10 +13,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.w3c.dom.html.HTMLAnchorElement;
 
 import javax.servlet.http.HttpSession;
-import java.util.Date;
 
 @Controller
 public class TimelineController {

@@ -1,4 +1,4 @@
-package de.hska.lkit.demo.web;
+package de.hska.lkit.demo.web.model.user;
 
 /**
  * Created by Tobias Kerst on 31.05.2016.

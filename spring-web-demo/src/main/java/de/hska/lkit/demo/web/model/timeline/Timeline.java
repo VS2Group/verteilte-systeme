@@ -1,4 +1,7 @@
-package de.hska.lkit.demo.web;
+package de.hska.lkit.demo.web.model.timeline;
+
+import de.hska.lkit.demo.web.model.post.Post;
+import de.hska.lkit.demo.web.model.user.User;
 
 import java.util.LinkedHashMap;
 import java.util.Map;

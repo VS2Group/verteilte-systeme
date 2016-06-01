@@ -1,4 +1,4 @@
-package de.hska.lkit.demo.web;
+package de.hska.lkit.demo.web.model.user;
 
 import java.io.Serializable;
 

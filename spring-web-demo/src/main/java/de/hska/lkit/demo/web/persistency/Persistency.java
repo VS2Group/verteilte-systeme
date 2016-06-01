@@ -1,13 +1,15 @@
-package de.hska.lkit.demo.web;
+package de.hska.lkit.demo.web.persistency;
 
 /**
  * Created by patrickkoenig on 29.05.16.
  */
 
+import de.hska.lkit.demo.web.model.post.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.*;
 import org.springframework.data.redis.support.atomic.RedisAtomicLong;
 import org.springframework.stereotype.Repository;
+import de.hska.lkit.demo.web.model.user.User;
 
 import java.util.*;
 

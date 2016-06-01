@@ -1,7 +1,10 @@
-package de.hska.lkit.demo.web;
+package de.hska.lkit.demo.web.model.timeline;
 
+import de.hska.lkit.demo.web.persistency.Persistency;
+import de.hska.lkit.demo.web.model.post.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import de.hska.lkit.demo.web.model.user.User;
 
 import java.util.List;
 

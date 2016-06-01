@@ -1,4 +1,4 @@
-package de.hska.lkit.demo.web;
+package de.hska.lkit.demo.web.model.post;
 
 import java.io.Serializable;
 import java.util.Date;

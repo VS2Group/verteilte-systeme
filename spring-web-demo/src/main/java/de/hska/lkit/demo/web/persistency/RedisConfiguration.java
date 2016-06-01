@@ -1,4 +1,4 @@
-package de.hska.lkit.demo.web;
+package de.hska.lkit.demo.web.persistency;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,6 +9,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 import redis.clients.jedis.JedisPoolConfig;
+import de.hska.lkit.demo.web.model.user.User;
 
 @Configuration
 public class RedisConfiguration {
