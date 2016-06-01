@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpSession;
+import java.util.Set;
 
 @Controller
 public class TimelineController {
@@ -47,9 +48,16 @@ public class TimelineController {
             model.addAttribute("streamName", "von " + username);
         }
 
+        Set<String> following = persistency.getFollowingIds(profileUser.getUsername());
+        Set<String> follower = persistency.getFollowerIds(profileUser.getUsername());
+
         model.addAttribute("pageuser", profileUser.getUsername());
         model.addAttribute("profilepicture", "/images/profile-pictures/" + profileUser.getProfilePicture());
         model.addAttribute("timeline", timeline);
+        model.addAttribute("followerCounter", follower.size() + " folge " +
+                "ich");
+        model.addAttribute("followingCounter", following.size() + " " +
+                "folgen mir");
         return "my-stream";
     }
 
@@ -58,7 +66,7 @@ public class TimelineController {
     }
 
     @RequestMapping(value = "/timeline", method = RequestMethod.GET)
-    public String showUserTimeline(@ModelAttribute Timeline timeline, HttpSession session,
+    public String showTimeline(@ModelAttribute Timeline timeline, HttpSession session,
                                    Model model) {
         if (session == null || session.getAttribute("username") == null) {
             return "redirect:./login";
@@ -70,5 +78,19 @@ public class TimelineController {
         return "all-posts";
     }
 
+    @RequestMapping(value = "/follow/{username}")
+    public String followUser(@PathVariable("username") String username, @ModelAttribute Timeline timeline,
+                                   Model model, HttpSession session) {
+
+        if (session == null || session.getAttribute("username") == null) {
+            return "redirect:../login";
+        }
+
+        persistency.follow(session.getAttribute("username").toString(), username);
+        System.out.println(session.getAttribute("username").toString() + " is following " + username + " now.");
+
+        return "redirect:../timeline/" + username;
+
+    }
 
 }

@@ -69,7 +69,12 @@
                   <h3 class="profile-name">@<span th:text="${pageuser}"></span></h3>
                 </div>
                 <div class="col-xs-5">
+                  <a th:href="'../follow/' +${pageuser}" th:if="${streamName != 'My Stream'}" class="btn btn-dark" style="align: right; margin: 15px 0"
+                     aria-label="Folgen">
+                    <span class="glyphicon glyphicon-plus" aria-hidden="true"></span> Folgen
+                  </a>
                 </div>
+
               </div>
               <p class="info-text"><span class="info">Info:</span>Dieser User hat keine Angaben zu seinem Status
                 gemacht.</p>
@@ -78,8 +83,8 @@
 
           <div class="follower-info">
             <div class="row">
-              <div class="col-xs-6 col-sm-12">73 folge ich</div>
-              <div class="col-xs-6 col-sm-12">15 folgen mir</div>
+              <div class="col-xs-6 col-sm-12" th:text="${followerCounter}"></div>
+              <div class="col-xs-6 col-sm-12" th:text="${followingCounter}"></div>
             </div>
           </div>
         </div>
