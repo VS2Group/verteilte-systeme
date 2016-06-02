@@ -35,9 +35,10 @@ public class RegisterController {
             System.out.println("Passwords match");
             if (!persistency.userExists(user)) {
                 persistency.createUser(user);
+                model.addAttribute("success", "Der User " + user.getUsername() + " wurde erfolgreich registriert.");
                 System.out.println("User with name {" + user.getUsername() + "} created.");
             } else {
-                model.addAttribute("error", "User already exists");
+                model.addAttribute("error", "Der User " + user.getUsername() + " existiert bereits.");
                 System.out.println("User with username {" + user.getUsername() + "} already exists");
             }
         }

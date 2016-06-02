@@ -24,8 +24,10 @@
       <div class="site-wrapper-inner">
 
         <div class="cover-container">
-
-          <p th:text="( ${error} != null ? ${error} + '!' : '')"/>
+            <div class="alert alert-danger" th:if="${error != null}">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Error!</strong> <span th:text="${error}"></span>
+            </div>
 
           <div class="masthead clearfix">
             <div class="inner">

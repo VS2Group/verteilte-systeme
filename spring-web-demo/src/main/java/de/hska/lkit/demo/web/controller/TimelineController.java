@@ -102,6 +102,7 @@ public class TimelineController {
         }
 
         persistency.follow(session.getAttribute("username").toString(), username);
+        model.addAttribute("success", "Du folgst nun " + username);
         System.out.println(session.getAttribute("username").toString() + " is following " + username + " now.");
 
         return "redirect:../timeline/" + username;

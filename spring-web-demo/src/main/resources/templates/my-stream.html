@@ -60,6 +60,19 @@
 
     <div class="container">
       <div class="row">
+          <row>
+              <div class="col-sm-8 col-sm-offset-2">
+                  <div class="alert alert-danger" th:if="${error != null}">
+                      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                      <strong>Error!</strong> <span th:text="${error}"></span>
+                  </div>
+
+                  <div class="alert alert-success" th:if="${success != null}">
+                      <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                      <strong>Success!</strong> <span th:text="${success}"></span>
+                  </div>
+              </div>
+          </row>
         <div class="col-sm-6 col-md-4">
           <div class="thumbnail profile">
             <img th:src="${profilepicture}" alt="profile-pic" class="img-circle" />
