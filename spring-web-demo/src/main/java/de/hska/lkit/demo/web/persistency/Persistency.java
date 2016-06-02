@@ -244,11 +244,15 @@ public class Persistency {
         for (String user : users) {
             String username = user.split(":")[1];
 
-
-
-            if (username.toLowerCase().startsWith(searchTerm.toLowerCase())){
-
-                usersFound.add(username);
+            if (searchTerm.endsWith("*")) {
+                System.out.println("Fuzzy Search!");
+                if (username.toLowerCase().startsWith(searchTerm.substring(0, searchTerm.length() - 1).toLowerCase())) {
+                    usersFound.add(username);
+                }
+            } else {
+                if (username.toLowerCase().equals(searchTerm.toLowerCase())) {
+                    usersFound.add(username);
+                }
             }
 
         }
