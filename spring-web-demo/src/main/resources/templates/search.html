@@ -1,100 +1,103 @@
-
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
-  <head>
+<head>
     <meta charset="utf-8"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <meta name="viewport" content="width=device-width, initial-scale=1"/>
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
     <meta name="description" content=""/>
     <meta name="author" content=""/>
-      <link rel="icon" th:href="@{/images/favicon.ico}"/>
+    <link rel="icon" th:href="@{/images/favicon.ico}"/>
 
     <title>Stuttr - Suche</title>
 
-      <link th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}" rel="stylesheet" media="screen" />
-      <link th:href="@{/css/style.css}" type="text/css" rel="stylesheet" />
+    <link th:href="@{/webjars/bootstrap/3.3.4/css/bootstrap.min.css}" rel="stylesheet" media="screen"/>
+    <link th:href="@{/css/style.css}" type="text/css" rel="stylesheet"/>
 
-      <link th:href="@{/css/profile.css}" type="text/css" rel="stylesheet"/>
-      <link th:href="@{/css/posts.css}" type="text/css" rel="stylesheet"/>
-  </head>
-  <body>
+    <link th:href="@{/css/profile.css}" type="text/css" rel="stylesheet"/>
+    <link th:href="@{/css/posts.css}" type="text/css" rel="stylesheet"/>
+</head>
+<body>
 
-    <nav class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container-fluid">
+<nav class="navbar navbar-inverse navbar-fixed-top">
+    <div class="container-fluid">
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="#">Stuttr</a>
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                    aria-expanded="false" aria-controls="navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">Stuttr</a>
         </div>
         <div id="navbar" class="navbar-collapse collapse">
-          <ul class="nav navbar-nav navbar-right">
-            <li>
-              <a href="create-post" class="btn btn-dark new-post" aria-label="Post schreiben">
-              Post schreiben <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
-              </a>
-            </li>
-            <li><a href="timeline">Alle Posts</a></li>
-            <li><a href="timeline/my-stream">Mein Stream</a></li>
-            <li><a href="logout">Logout</a></li>
-          </ul>
-          <form class="navbar-form navbar-right">
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Suchen..." />
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <a href="create-post" class="btn btn-dark new-post" aria-label="Post schreiben">
+                        Post schreiben <span class="glyphicon glyphicon-edit" aria-hidden="true"></span>
+                    </a>
+                </li>
+                <li><a href="timeline">Alle Posts</a></li>
+                <li><a href="timeline/my-stream">Mein Stream</a></li>
+                <li><a href="logout">Logout</a></li>
+            </ul>
+            <form class="navbar-form navbar-right" th:action="@{/search}" th:object="${string}" method="get">
+                <div class="input-group">
+                    <input type="text" th:name="searchterm" class="form-control" placeholder="Suchen..."/>
               <span class="input-group-btn">
-                <button class="btn btn-default searchbutton" type="button">
-                  <span class="glyphicon glyphicon-search" aria-hidden="true">
-                  </span>
+                <button class="btn btn-default searchbutton" type="submit">
+                  <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                 </button>
               </span>
-            </div>
-          </form>
+                </div>
+            </form>
         </div>
-      </div>
-    </nav>
-
-    <div class="container">
-      <div class="row">
-        <div class="col-sm-8 col-sm-offset-2">
-          <div class="posts">
-            <div class="page-header">
-              <h1>Suche <small>Taub*</small></h1>
-            </div>
-
-            <div class="post thumbnail" th:each="user : ${foundUsers}">
-              <div class="row">
-                <div class="col-xs-2 col-sm-2 col-md-1 img-circle">
-                  <img th:src="'/images/profile-pictures/' + ${user.getProfilePicture()}" alt="profile-pic" class="img-circle profile-picture" width="65px" height="65px" />
-                </div>
-                <div class="col-xs-10">
-                  <p class="user-name" th:text="${user.username}"></p>
-                  <!-- <p class="user-follower">75 Follower</p> -->
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-xs-12 col-sm-10 col-sm-offset-1">
-                  <div class="post-content">
-                    <p>Keine Info vorhanden</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-
-          </div>
-        </div>
-      </div>
     </div>
+</nav>
 
-    </body>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+            <div class="posts">
+                <div class="page-header">
+                    <h1>Suche
+                        <small th:text="${searchString} + '*'"></small>
+                    </h1>
+                </div>
 
-  <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
-    <script th:src="@{/webjars/bootstrap/3.3.4/js/bootstrap.min.js}"></script>
+                <div class="post thumbnail" th:each="user : ${foundUsers}">
+                    <div class="row">
+                        <div class="col-xs-2 col-sm-2 col-md-1 img-circle">
+                            <img th:src="'/images/profile-pictures/' + ${user.getProfilePicture()}" alt="profile-pic"
+                                 class="img-circle profile-picture" width="65px" height="65px"/>
+                        </div>
+                        <div class="col-xs-10">
+                            <a th:href="'./timeline/' + ${user.username}"><p class="user-name"
+                                                                             th:text="${user.username}"></p></a>
+                            <!-- <p class="user-follower">75 Follower</p> -->
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+                            <div class="post-content">
+                                <p>Keine Info vorhanden</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+
+<!-- Bootstrap core JavaScript
+  ================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script th:src="@{/webjars/jquery/2.1.4/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/3.3.4/js/bootstrap.min.js}"></script>
 </html>

@@ -44,6 +44,7 @@ public class SearchController {
         }
 
         model.addAttribute("foundUsers", foundUser);
+        model.addAttribute("searchString", searchterm);
         return "search";
     }
 }
