@@ -61,6 +61,7 @@ public class TimelineController {
         System.out.println("Am I following this user: " + isFollowingProfileUser);
 
         model.addAttribute("posts", posts);
+        System.out.println("Number of posts: " + posts.size());
         model.addAttribute("isFollowing", isFollowingProfileUser);
         model.addAttribute("pageuser", profileUser.getUsername());
         model.addAttribute("profilepicture", "/images/profile-pictures/" + profileUser.getProfilePicture());

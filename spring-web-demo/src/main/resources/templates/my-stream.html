@@ -96,122 +96,30 @@
               <h1>Posts <small th:text="${streamName}"></small></h1>
             </div>
 
-            <div class="post thumbnail">
+            <div class="post thumbnail" th:each="post : ${posts}">
               <div class="row">
                 <div class="col-xs-2 img-circle">
                   <img th:src="@{/images/profile-pictures/55.png}" alt="profile-pic" class="img-circle profile-picture" width="65px" height="65px" />
                 </div>
                 <div class="col-xs-10">
-                  <p class="user-name">@Misty</p>
+                  <p class="user-name" th:text="${post.userName}">@Misty</p>
                   <p class="time">19.3.2016 - 20:56 Uhr</p>
                 </div>
               </div>
               <div class="row">
                 <div class="col-xs-12 col-sm-10 col-sm-offset-1">
                   <div class="post-content">
-                    <p>@Mauzi #TeamRocket hat mal wieder versagt. Ihr solltet es mal mit ordentlicher Arbeit versuchen.</p>
+                    <p th:text="${post.content}"></p>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div class="post thumbnail">
-              <div class="row">
-                <div class="col-xs-2 img-circle">
-                  <img th:src="@{/images/profile-pictures/52.png}" alt="profile-pic" class="img-circle profile-picture" width="65px" height="65px" />
-                </div>
-                <div class="col-xs-10">
-                  <p class="user-name">@Mauzi</p>
-                  <p class="time">19.3.2016 - 20:52 Uhr</p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-xs-12 col-sm-10 col-sm-offset-1">
-                  <div class="post-content">
-                    <p>Das war mal wieder ein Schuss in den Ofen. (´･ω･`) #Schnauf </p>
-                  </div>
-                </div>
-              </div>
-            </div>
 
-                <div class="post thumbnail">
-              <div class="row">
-                <div class="col-xs-2 img-circle">
-                  <img th:src="@{/images/profile-pictures/52.png}" alt="profile-pic" class="img-circle profile-picture" width="65px" height="65px" />
-                </div>
-                <div class="col-xs-10">
-                  <p class="user-name">@Mauzi</p>
-                  <p class="time">19.3.2016 - 20:37 Uhr</p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-xs-12 col-sm-10 col-sm-offset-1">
-                  <div class="post-content">
-                    <p>Wir haben Pikachu gefangen. #TeamRocketRulez *miautz*</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="post thumbnail">
-              <div class="row">
-                <div class="col-xs-2 img-circle">
-                  <img th:src="@{/images/profile-pictures/25.png}" alt="profile-pic" class="img-circle profile-picture" width="65px" height="65px" />
-                </div>
-                <div class="col-xs-10">
-                  <p class="user-name">@AshKetchum</p>
-                  <p class="time">19.3.2016 - 18:59 Uhr</p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-xs-12 col-sm-10 col-sm-offset-1">
-                  <div class="post-content">
-                    <p>Dieses Mauzi nervt schon ungemein.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <div class="post thumbnail">
-              <div class="row">
-                <div class="col-xs-2 img-circle">
-                  <img th:src="@{/images/profile-pictures/52.png}" alt="profile-pic" class="img-circle profile-picture" width="65px" height="65px" />
-                </div>
-                <div class="col-xs-10">
-                  <p class="user-name">@Mauzi</p>
-                  <p class="time">19.3.2016 - 18:10 Uhr</p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-xs-12 col-sm-10 col-sm-offset-1">
-                  <div class="post-content">
-                    <p>In Alabasta ist ein großes Pokemon Turnier. Mal sehen, ob #TeamRocket dort etwas abstauben kann.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
 
 
 
-            <div class="post thumbnail">
-              <div class="row">
-                <div class="col-xs-2 img-circle">
-                  <img th:src="@{/images/profile-pictures/52.png}" alt="profile-pic" class="img-circle profile-picture" width="65px" height="65px" />
-                </div>
-                <div class="col-xs-10">
-                  <p class="user-name">@Mauzi</p>
-                  <p class="time">14.3.2016 - 02:16 Uhr</p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-xs-12 col-sm-10 col-sm-offset-1">
-                  <div class="post-content">
-                    <p>Insgeheim möchte ich ja die Lieblingskatze vom Boss sein.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
 
 

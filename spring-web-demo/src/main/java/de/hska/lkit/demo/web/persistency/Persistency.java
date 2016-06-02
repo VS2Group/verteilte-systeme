@@ -51,9 +51,9 @@ public class Persistency {
     }
 
     private List<String> getAllUsers() {
-        Set<String> users =redisStringSetOps.members("allusers");
+        Set<String> users = redisStringSetOps.members("allusers");
         List<String> usernames = new ArrayList<>();
-        for(String userelement : users) {
+        for (String userelement : users) {
             String[] elementParts = userelement.split(":");
             usernames.add(elementParts[1]);
         }
@@ -86,7 +86,7 @@ public class Persistency {
         }
     }
 
-    public User getUser (String username){
+    public User getUser(String username) {
         User user = new User();
         user.setUsername(username);
         return getUser(user);
@@ -130,7 +130,7 @@ public class Persistency {
 
         if (redisStringSetOps.isMember("allusers", "user:" + username) && redisStringListOps.size(userPostsKey) != 0) {
             System.out.println("In der Funktion");
-            posts.addAll(redisStringListOps.range(userPostsKey,0,-1));
+            posts.addAll(redisStringListOps.range(userPostsKey, 0, -1));
         }
 
         return posts;
@@ -140,15 +140,19 @@ public class Persistency {
         List<String> postIds = findPostIdsForUser(username);
         List<Post> posts = new ArrayList<>();
         for (String postId : postIds) {
-            posts.add(findPostWithId(Integer.parseInt(postId)));
+            Post postWithId = findPostWithId(Integer.parseInt(postId));
+            if (postWithId != null) {
+                postWithId.setUserName(username);
+                posts.add(postWithId);
+            }
         }
         return posts;
     }
 
-     public List<Post> findGlobalPosts(long start, long end) {
+    public List<Post> findGlobalPosts(long start, long end) {
         List<Post> posts = new LinkedList<>();
 
-		Long postCount = redisStringSortedSetOps.zCard("alleposts:");
+        Long postCount = redisStringSortedSetOps.zCard("alleposts:");
 
 
         Set<String> postIDs = redisStringSortedSetOps.range("alleposts:", start, end);
@@ -162,20 +166,22 @@ public class Persistency {
         return posts;
     }
 
-    public Post findPostWithId (int id){
+    public Post findPostWithId(int id) {
 
         Post post = new Post();
-        String key = "posts" + id;
+        String key = "posts:" + id;
 
         post.setId(redisStringHashOps.get(key, "id"));
         post.setContent(redisStringHashOps.get(key, "content"));
         String date = redisStringHashOps.get(key, "date");
-        if(date != null) {
+        if (date != null) {
             post.setDate(new Date(Long.valueOf(date)));
         }
 
-        if (null == post.getContent() || post.getContent().isEmpty())
+        if (null == post.getContent() || post.getContent().isEmpty()) {
+            System.out.println("ERRRROR: Content is empty!");
             return null;
+        }
 
         return post;
 
@@ -183,13 +189,13 @@ public class Persistency {
 
     public void follow(String usernameFollower, String usernameFollowing) {
         String followerKey = "user:" + usernameFollower + ":following";
-        String followingKey ="user:" + usernameFollowing + ":follower";
+        String followingKey = "user:" + usernameFollowing + ":follower";
 
         redisStringSetOps.add(followerKey, usernameFollowing);
         redisStringSetOps.add(followingKey, usernameFollower);
     }
 
-    public Set<String> getFollowerIds (String username){
+    public Set<String> getFollowerIds(String username) {
         Set<String> follower = new HashSet<>();
         String followerKey = "user:" + username + ":follower";
 
@@ -201,7 +207,7 @@ public class Persistency {
 
     }
 
-    public Set<String> getFollowingIds (String username){
+    public Set<String> getFollowingIds(String username) {
         Set<String> following = new HashSet<>();
         String followingKey = "user:" + username + ":following";
         if (redisStringSetOps.isMember("allusers", "user:" + username) && redisStringSetOps.size(followingKey) != 0) {
@@ -213,15 +219,15 @@ public class Persistency {
 
     }
 
-    public List<String> searchUsers (String searchTerm){
+    public List<String> searchUsers(String searchTerm) {
 
-        Set<String> users =redisStringSetOps.members("allusers");
+        Set<String> users = redisStringSetOps.members("allusers");
         List<String> usersFound = new ArrayList<>();
 
-        for(String user: users){
+        for (String user : users) {
             String username = user.split(":")[1];
 
-            if (username.startsWith(searchTerm)){
+            if (username.startsWith(searchTerm)) {
                 usersFound.add(username);
             }
 
@@ -229,7 +235,6 @@ public class Persistency {
 
         return usersFound;
     }
-
 
 
 }
