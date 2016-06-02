@@ -65,62 +65,26 @@
               <h1>Suche <small>Taub*</small></h1>
             </div>
 
-            <div class="post thumbnail">
+            <div class="post thumbnail" th:each="user : ${foundUsers}">
               <div class="row">
                 <div class="col-xs-2 col-sm-2 col-md-1 img-circle">
-                  <img th:src="@{/images/profile-pictures/16.png}" alt="profile-pic" class="img-circle profile-picture" width="65px" height="65px" />
+                  <img th:src="'/images/profile-pictures/' + ${user.getProfilePicture()}" alt="profile-pic" class="img-circle profile-picture" width="65px" height="65px" />
                 </div>
                 <div class="col-xs-10">
-                  <p class="user-name">@Taubsi</p>
-                  <p class="user-follower">75 Follower</p>
+                  <p class="user-name" th:text="${user.username}"></p>
+                  <!-- <p class="user-follower">75 Follower</p> -->
                 </div>
               </div>
               <div class="row">
                 <div class="col-xs-12 col-sm-10 col-sm-offset-1">
                   <div class="post-content">
-                    <p>Info von Taubsi</p>
+                    <p>Keine Info vorhanden</p>
                   </div>
                 </div>
               </div>
             </div>
 
-                <div class="post thumbnail">
-              <div class="row">
-                <div class="col-xs-2 col-sm-2 col-md-1 img-circle">
-                  <img th:src="@{/images/profile-pictures/17.png}" alt="profile-pic" class="img-circle profile-picture" width="65px" height="65px" />
-                </div>
-                <div class="col-xs-10">
-                  <p class="user-name">@Tauboga</p>
-                  <p class="user-follower">13 Follower</p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-xs-12 col-sm-10 col-sm-offset-1">
-                  <div class="post-content">
-                    <p>Info von Tauboga, hier ewas mehr Text.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
 
-            <div class="post thumbnail">
-              <div class="row">
-                <div class="col-xs-2 col-sm-2 col-md-1 img-circle">
-                  <img th:src="@{/images/profile-pictures/18.png}" alt="profile-pic" class="img-circle profile-picture" width="65px" height="65px" />
-                </div>
-                <div class="col-xs-10">
-                  <p class="user-name">@Tauboss</p>
-                  <p class="user-follower">623 Follower</p>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-xs-12 col-sm-10 col-sm-offset-1">
-                  <div class="post-content">
-                    <p>Info zu Tauboss, dem besten Flugpokemon neben Dragoran.</p>
-                  </div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>

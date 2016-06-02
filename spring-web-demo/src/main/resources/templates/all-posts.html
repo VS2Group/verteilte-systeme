@@ -44,11 +44,11 @@
             <li><a href="./timeline/my-stream">Mein Stream</a></li>
             <li><a href="./logout">Logout</a></li>
           </ul>
-          <form class="navbar-form navbar-right">
+          <form class="navbar-form navbar-right" th:action="@{/search}" th:object="${string}" method="get">
             <div class="input-group">
-              <input type="text" class="form-control" placeholder="Suchen..."/>
+              <input type="text" th:name="searchterm" class="form-control" placeholder="Suchen..."/>
               <span class="input-group-btn">
-                <button class="btn btn-default searchbutton" type="button">
+                <button class="btn btn-default searchbutton" type="submit">
                   <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
                 </button>
               </span>

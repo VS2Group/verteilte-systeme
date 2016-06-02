@@ -1,16 +1,15 @@
 package de.hska.lkit.demo.web.controller;
 
 import de.hska.lkit.demo.web.model.timeline.Timeline;
+import de.hska.lkit.demo.web.model.user.User;
 import de.hska.lkit.demo.web.persistency.Persistency;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -27,18 +26,24 @@ public class SearchController {
         this.persistency = persistency;
     }
 
-    @RequestMapping(value = "/search/{searchterm}", method = RequestMethod.GET)
-    public String showUserTimeline(@PathVariable("searchterm") String searchterm, @ModelAttribute Timeline timeline,
-                                   Model model, HttpSession session) {
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    public String showUserTimeline(@RequestParam(value = "searchterm") String searchterm, @ModelAttribute Timeline
+            timeline, Model model, HttpSession session) {
 
         if (session == null || session.getAttribute("username") == null) {
             return "redirect:../login";
         }
 
-        List<String> foundUsers = persistency.searchUsers(searchterm);
-        System.out.println(foundUsers.toString());
+        List<String> foundUserNames = persistency.searchUsers(searchterm);
+        List<User> foundUser = new ArrayList<>();
 
+        for (String username : foundUserNames) {
+            User tempUser = new User();
+            tempUser.setUsername(username);
+            foundUser.add(tempUser);
+        }
 
+        model.addAttribute("foundUsers", foundUser);
         return "search";
     }
 }
