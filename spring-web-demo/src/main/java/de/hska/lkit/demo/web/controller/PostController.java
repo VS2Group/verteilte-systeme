@@ -49,8 +49,12 @@ public class PostController {
         }
         String username = session.getAttribute("username").toString();
 
+        if (post.getContent().length() >= 140) {
+            model.addAttribute("error", "Dein Post ist länger als 140 Zeichen (" + post.getContent().length() + "" +
+                    " Zeichen). Bitte  halte dich etwas kürzer!");
+            return "./create-post";
+        }
         persistency.createPost(post, username);
-        System.out.println("Post created by user {" + username + "}: " + post.getContent());
         return "redirect:./timeline";
     }
 }

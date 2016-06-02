@@ -62,6 +62,10 @@
       <div class="row">
 
         <div class="col-sm-8 col-sm-offset-2">
+          <div class="alert alert-danger" th:if="${error != null}">
+            <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            <strong>Error!</strong> <span th:text="${error}"></span>
+          </div>
             <div class="create-post-container">
               <div class="form-group">
                 <form class="form-signin" th:action="@{/create-post}" th:object="${post}" method="post">
