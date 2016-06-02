@@ -83,10 +83,10 @@ public class TimelineController {
         if (session == null || session.getAttribute("username") == null) {
             return "redirect:./login";
         }
-        String username = session.getAttribute("username").toString();
-        System.out.println("Username in session: {" + username + "}");
 
-        model.addAttribute("timeline", timeline);
+        List<Post> posts = persistency.findGlobalPosts(0, -1);
+        System.out.println("Total Post Count: " + posts.size());
+        model.addAttribute("posts", posts);
         return "all-posts";
     }
 

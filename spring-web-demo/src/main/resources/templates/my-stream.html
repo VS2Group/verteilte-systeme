@@ -102,8 +102,8 @@
                   <img th:src="'/images/profile-pictures/' + ${post.profilePicturePath}" alt="profile-pic" class="img-circle profile-picture" width="65px" height="65px" />
                 </div>
                 <div class="col-xs-10">
-                  <p class="user-name" th:text="${post.userName}">@Misty</p>
-                  <p class="time" th:text="${post.date}"></p>
+                    <a th:href="'./' + ${post.userName}"><p class="user-name" th:text="${post.userName}"></p></a>
+                    <p class="time" th:text="${post.date}"></p>
                 </div>
               </div>
               <div class="row">

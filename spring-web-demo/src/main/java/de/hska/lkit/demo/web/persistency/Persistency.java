@@ -105,10 +105,10 @@ public class Persistency {
         redisStringHashOps.put(key, "content", post.getContent());
         redisStringHashOps.put(key, "date", String.valueOf(post.getDate().getTime()));
 
-        redisStringSortedSetOps.add("allposts:", id, realID);
+        redisStringSortedSetOps.add("allposts", id, realID * -1);
 
         String userPostsKey = "user:" + username + ":posts";
-        redisStringListOps.rightPush(userPostsKey, id);
+        redisStringListOps.leftPush(userPostsKey, id);
 
 
         String postToUserKey = "posts:" + id + ":user";
@@ -155,16 +155,17 @@ public class Persistency {
     public List<Post> findGlobalPosts(long start, long end) {
         List<Post> posts = new LinkedList<>();
 
-        Long postCount = redisStringSortedSetOps.zCard("alleposts:");
+        Long postCount = redisStringSortedSetOps.zCard("allposts");
 
-
-        Set<String> postIDs = redisStringSortedSetOps.range("alleposts:", start, end);
+        Set<String> postIDs = redisStringSortedSetOps.range("allposts", start, end);
 
         for (String id : postIDs) {
-
+            User user = findUserForPost(id);
             int intid = Integer.parseInt(id);
-
-            posts.add(findPostWithId(intid));
+            Post post = findPostWithId(intid);
+            post.setProfilePicturePath(user.getProfilePicture());
+            post.setUserName(user.getUsername());
+            posts.add(post);
         }
         return posts;
     }
