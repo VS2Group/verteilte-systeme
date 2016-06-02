@@ -10,6 +10,8 @@ a:hover {
   text-decoration: none;
 }
 
+
+
 /* Custom default button */
 .btn-default,
 .btn-default:hover,
@@ -141,10 +143,11 @@ body {
   color: #fff;
 }
 
+
 .btn-dark:hover,
 .btn-dark:focus,
 .btn-dark:active {
-  background-color: #666;
+  background-color: #666 !important;
   color: #fff;
 }
 
