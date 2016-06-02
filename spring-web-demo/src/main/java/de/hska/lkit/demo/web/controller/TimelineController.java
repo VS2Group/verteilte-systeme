@@ -49,6 +49,9 @@ public class TimelineController {
             posts = persistency.findPostsForUser(profileUser.getUsername());
         } else {
             profileUser.setUsername(username);
+            if (!persistency.userExists(profileUser)) {
+                return "redirect:../timeline";
+            }
             model.addAttribute("streamName", "von " + username);
             posts = persistency.findPostsForUser(profileUser.getUsername());
         }
