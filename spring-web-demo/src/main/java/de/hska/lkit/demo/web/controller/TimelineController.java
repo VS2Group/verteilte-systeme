@@ -58,11 +58,14 @@ public class TimelineController {
 
         boolean isFollowingProfileUser = follower.contains(profileUser.getUsername());
 
+        boolean canFollow = !isMyStream(username) && !isFollowingProfileUser && !session.getAttribute("username")
+                .equals(username);
+
         System.out.println("Am I following this user: " + isFollowingProfileUser);
 
         model.addAttribute("posts", posts);
         System.out.println("Number of posts: " + posts.size());
-        model.addAttribute("isFollowing", isFollowingProfileUser);
+        model.addAttribute("canFollow", canFollow);
         model.addAttribute("pageuser", profileUser.getUsername());
         model.addAttribute("profilepicture", "/images/profile-pictures/" + profileUser.getProfilePicture());
         model.addAttribute("timeline", timeline);
