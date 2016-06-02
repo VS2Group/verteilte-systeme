@@ -144,7 +144,6 @@ public class Persistency {
 
 
         if (redisStringSetOps.isMember("allusers", "user:" + username) && redisStringListOps.size(userPostsKey) != 0) {
-            System.out.println("In der Funktion");
             posts.addAll(redisStringListOps.range(userPostsKey, 0, -1));
         }
 

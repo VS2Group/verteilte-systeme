@@ -45,7 +45,7 @@ public class TimelineController {
         List<Post> posts;
         if (isMyStream(username)) {
             profileUser.setUsername(session.getAttribute("username").toString());
-            model.addAttribute("streamName", "My Stream");
+            model.addAttribute("streamName", "Mein Stream");
             posts = persistency.findMyStreamPosts(profileUser.getUsername());
         } else {
             profileUser.setUsername(username);
@@ -64,14 +64,10 @@ public class TimelineController {
         boolean canFollow = !isMyStream(username) && !isFollowingProfileUser && !session.getAttribute("username")
                 .equals(username);
 
-        System.out.println("Am I following this user: " + isFollowingProfileUser);
-
         model.addAttribute("posts", posts);
-        System.out.println("Number of posts: " + posts.size());
         model.addAttribute("canFollow", canFollow);
         model.addAttribute("pageuser", profileUser.getUsername());
         model.addAttribute("profilepicture", "/images/profile-pictures/" + profileUser.getProfilePicture());
-        model.addAttribute("timeline", timeline);
         model.addAttribute("followerCounter", follower.size() + " folgen " +
                 "mir");
         model.addAttribute("followingCounter", following.size() + " " +
