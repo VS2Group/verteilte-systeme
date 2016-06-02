@@ -142,7 +142,10 @@ public class Persistency {
         for (String postId : postIds) {
             Post postWithId = findPostWithId(Integer.parseInt(postId));
             if (postWithId != null) {
+                User user = new User();
+                user.setUsername(username);
                 postWithId.setUserName(username);
+                postWithId.setProfilePicturePath(user.getProfilePicture());
                 posts.add(postWithId);
             }
         }
@@ -179,7 +182,6 @@ public class Persistency {
         }
 
         if (null == post.getContent() || post.getContent().isEmpty()) {
-            System.out.println("ERRRROR: Content is empty!");
             return null;
         }
 

@@ -11,12 +11,22 @@ public class Post implements Serializable {
     private int id;
     private String content;
     private String userName;
+    private String profilePicturePath;
     private Date date;
 
     public Post() {
         content = new String();
         userName = new String();
         date = new Date();
+    }
+
+
+    public String getProfilePicturePath() {
+        return profilePicturePath;
+    }
+
+    public void setProfilePicturePath(String profilePicturePath) {
+        this.profilePicturePath = profilePicturePath;
     }
 
     public int getId() {
@@ -28,7 +38,7 @@ public class Post implements Serializable {
     }
 
     public void setId(String id) {
-        if(id!= null) {
+        if (id != null) {
             this.id = Integer.parseInt(id);
         }
     }
