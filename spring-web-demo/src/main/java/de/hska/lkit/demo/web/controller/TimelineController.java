@@ -56,7 +56,7 @@ public class TimelineController {
         Set<String> following = persistency.getFollowingIds(profileUser.getUsername());
         Set<String> follower = persistency.getFollowerIds(profileUser.getUsername());
 
-        boolean isFollowingProfileUser = follower.contains(profileUser.getUsername());
+        boolean isFollowingProfileUser = follower.contains(session.getAttribute("username").toString());
 
         boolean canFollow = !isMyStream(username) && !isFollowingProfileUser && !session.getAttribute("username")
                 .equals(username);
