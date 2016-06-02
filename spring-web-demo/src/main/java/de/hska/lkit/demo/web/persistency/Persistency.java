@@ -107,6 +107,7 @@ public class Persistency {
 
         redisStringSortedSetOps.add("allposts", id, realID * -1);
 
+
         String userPostsKey = "user:" + username + ":posts";
         redisStringListOps.leftPush(userPostsKey, id);
 
@@ -230,7 +231,10 @@ public class Persistency {
         for (String user : users) {
             String username = user.split(":")[1];
 
-            if (username.startsWith(searchTerm)) {
+
+
+            if (username.toLowerCase().startsWith(searchTerm.toLowerCase())){
+
                 usersFound.add(username);
             }
 
