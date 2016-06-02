@@ -46,7 +46,7 @@ public class TimelineController {
         if (isMyStream(username)) {
             profileUser.setUsername(session.getAttribute("username").toString());
             model.addAttribute("streamName", "My Stream");
-            posts = persistency.findPostsForUser(profileUser.getUsername());
+            posts = persistency.findMyStreamPosts(profileUser.getUsername());
         } else {
             profileUser.setUsername(username);
             if (!persistency.userExists(profileUser)) {

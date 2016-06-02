@@ -92,6 +92,20 @@ public class Persistency {
         return getUser(user);
     }
 
+    public List<Post> findMyStreamPosts(String username) {
+        List<Post> myStreamPosts = new ArrayList<>();
+        List<Post> allPosts = findGlobalPosts(0, -1);
+        Set<String> following = getFollowingIds(username);
+
+        for (Post postInAllPosts : allPosts) {
+            if (following.contains(postInAllPosts.getUserName())) {
+                myStreamPosts.add(postInAllPosts);
+            }
+        }
+
+        return myStreamPosts;
+    }
+
     public void createPost(Post post, String username) {
 
         // generate a unique id
