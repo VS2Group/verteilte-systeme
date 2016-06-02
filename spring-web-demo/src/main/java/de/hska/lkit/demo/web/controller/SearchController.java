@@ -39,10 +39,10 @@ public class SearchController {
 
         for (String username : foundUserNames) {
             User tempUser = new User();
+            tempUser.setFollower(persistency.getFollowerIds(username));
             tempUser.setUsername(username);
             foundUser.add(tempUser);
         }
-
         model.addAttribute("foundUsers", foundUser);
         model.addAttribute("searchString", searchterm);
         return "search";

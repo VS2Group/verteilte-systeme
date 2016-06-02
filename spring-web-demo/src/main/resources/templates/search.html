@@ -75,7 +75,7 @@
                         <div class="col-xs-10">
                             <a th:href="'./timeline/' + ${user.username}"><p class="user-name" style="margin-left:10px "
                                                                              th:text="'@' + ${user.username}"></p></a>
-                            <!-- <p class="user-follower">75 Follower</p> -->
+                            <p class="user-follower" th:text="${user.getFollower().size() + ' Person(en) folgen dieser Person'}"></p>
                         </div>
                     </div>
                     <div class="row">

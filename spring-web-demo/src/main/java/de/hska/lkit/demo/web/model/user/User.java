@@ -1,6 +1,8 @@
 package de.hska.lkit.demo.web.model.user;
 
 import java.io.Serializable;
+import java.util.List;
+import java.util.Set;
 
 /**
  * Created by Tobias Kerst on 29.05.2016.
@@ -18,6 +20,8 @@ public class User implements Serializable {
     private String username;
     private String password;
     private static final long serialVersionUID = 1L;
+    private Set<String> following;
+    private Set<String> follower;
 
 
     public User (long id, String username, String password) {
@@ -25,14 +29,24 @@ public class User implements Serializable {
         this.id=id;
         this.username=username;
         this.password = password;
-
     }
 
     public User () {}
+    public Set<String> getFollowing() {
+        return following;
+    }
 
+    public void setFollowing(Set<String> following) {
+        this.following = following;
+    }
 
+    public Set<String> getFollower() {
+        return follower;
+    }
 
-
+    public void setFollower(Set<String> follower) {
+        this.follower = follower;
+    }
 
 
     public long getId() {
