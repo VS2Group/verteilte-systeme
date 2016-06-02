@@ -212,6 +212,14 @@ public class Persistency {
         redisStringSetOps.add(followingKey, usernameFollower);
     }
 
+    public void unfollow(String usernameFollowing, String usernameFollower) {
+        String followerKey = "user:" + usernameFollower + ":follower";
+        String followingKey = "user:" + usernameFollowing + ":following";
+
+        redisStringSetOps.remove(followingKey, usernameFollower);
+        redisStringSetOps.remove(followerKey, usernameFollowing);
+    }
+
     public Set<String> getFollowerIds(String username) {
         Set<String> follower = new HashSet<>();
         String followerKey = "user:" + username + ":follower";

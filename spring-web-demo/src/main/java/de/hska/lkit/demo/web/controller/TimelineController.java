@@ -43,6 +43,7 @@ public class TimelineController {
         User profileUser = new User();
 
         List<Post> posts;
+        String returnPage;
         if (isMyStream(username)) {
             profileUser.setUsername(session.getAttribute("username").toString());
             model.addAttribute("streamName", "Mein Stream");
@@ -66,6 +67,7 @@ public class TimelineController {
 
         model.addAttribute("posts", posts);
         model.addAttribute("canFollow", canFollow);
+        model.addAttribute("canUnfollow", isFollowingProfileUser);
         model.addAttribute("pageuser", profileUser.getUsername());
         model.addAttribute("profilepicture", "/images/profile-pictures/" + profileUser.getProfilePicture());
         model.addAttribute("followerCounter", follower.size() + " folgen " +
@@ -100,10 +102,19 @@ public class TimelineController {
         }
 
         persistency.follow(session.getAttribute("username").toString(), username);
-        model.addAttribute("success", "Du folgst nun " + username);
 
         return "redirect:../timeline/" + username;
+    }
 
+    @RequestMapping(value = "/unfollow/{username}")
+    public String unfollowUser(@PathVariable("username") String username, Model model, HttpSession session) {
+        if (session == null || session.getAttribute("username") == null) {
+            return "redirect:../login";
+        }
+
+        persistency.unfollow(session.getAttribute("username").toString(), username);
+
+        return "redirect:../timeline/" + username;
     }
 
 }
