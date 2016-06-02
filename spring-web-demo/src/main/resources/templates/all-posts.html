@@ -74,7 +74,7 @@
                 </div>
                 <div class="col-xs-10">
                   <a th:href="'./timeline/' + ${post.userName}"><p class="user-name"
-                                                                        th:text="${post.userName}"></p></a>
+                                                                        th:text="'@' + ${post.userName}"></p></a>
                   <p class="time" th:text="${post.date}"></p>
                 </div>
               </div>

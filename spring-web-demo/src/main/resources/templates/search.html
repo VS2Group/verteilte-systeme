@@ -73,8 +73,8 @@
                                  class="img-circle profile-picture" width="65px" height="65px"/>
                         </div>
                         <div class="col-xs-10">
-                            <a th:href="'./timeline/' + ${user.username}"><p class="user-name"
-                                                                             th:text="${user.username}"></p></a>
+                            <a th:href="'./timeline/' + ${user.username}"><p class="user-name" style="margin-left:10px "
+                                                                             th:text="'@' + ${user.username}"></p></a>
                             <!-- <p class="user-follower">75 Follower</p> -->
                         </div>
                     </div>
