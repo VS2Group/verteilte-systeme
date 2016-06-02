@@ -28,7 +28,7 @@ public class RegisterController {
     public String registerUser (@ModelAttribute UserRegister user, Model model) {
         if (!user.getPassword().equals(user.getPasswordRepeat())) {
             System.out.println("Wrong password!");
-            model.addAttribute("error", "Passwords don't match");
+            model.addAttribute("error", "Passwords stimmen nicht überein.");
             return "register";
 
         } else {

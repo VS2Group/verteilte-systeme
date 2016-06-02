@@ -70,10 +70,10 @@ public class TimelineController {
         model.addAttribute("canUnfollow", isFollowingProfileUser);
         model.addAttribute("pageuser", profileUser.getUsername());
         model.addAttribute("profilepicture", "/images/profile-pictures/" + profileUser.getProfilePicture());
-        model.addAttribute("followerCounter", follower.size() + " folgen " +
-                "mir");
-        model.addAttribute("followingCounter", following.size() + " " +
-                "folge ich");
+        model.addAttribute("followerCounter", follower.size() + " Personen folgen " +
+                profileUser.getUsername());
+        model.addAttribute("followingCounter", following.size() + " Personen " +
+                "folgt " + profileUser.getUsername());
         return "my-stream";
     }
 
