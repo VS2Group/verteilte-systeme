@@ -49,13 +49,13 @@ In beiden Fällen wird die Session geschlossen und der User wird auf die Seite \
 \newpage
 \section{Implementierung weiterer Features}
 \subsection{Anzeige von Nutzerprofilen und Timelines}
-Die Anzeige ist wie in den vorherigen Beispieln implementiert. Es wird ein Profilbild für jeden Nutzer angezeigt und außerdem kann man über einen Klick auf den Namen von einem Post-Autor klicken, um diesen aufzurufen.\\
-Die Posts sind so sortiert, dass die jeweils neustens Posts oben erscheinen.
+Die Anzeige ist wie in den vorherigen Beispielen implementiert. Es wird ein Profilbild für jeden Nutzer angezeigt und außerdem kann man über einen Klick auf den Namen von einem Post-Autor klicken, um diesen aufzurufen.\\
+Die Posts sind so sortiert, dass die jeweils neuesten Posts oben erscheinen.
 
 Es gibt die folgenden Post-Listen:
 \begin{enumerate}
 \item Die \textbf{Profil-Posts} sind alle Posts eines Nutzers.
-\item \textbf{Alle Posts} ist ein Übersicht aller Posts, die auf der Plattform hinterlassen wurden. Hierüber kann man interessante Posts lesen und sich mit neuen Nutzern verbinden.
+\item \textbf{Alle Posts} ist eine Übersicht aller Posts, die auf der Plattform hinterlassen wurden. Hierüber kann man interessante Posts lesen und sich mit neuen Nutzern verbinden.
 \item \textbf{Mein Stream} ist eine Auflistung der Posts von Leuten, denen man folgt.
 \end{enumerate}
 
@@ -66,4 +66,4 @@ Um einen Post zu verfassen, klickt man in dem oberen Menü auf \texttt{Post schr
 Das Folgen eines Nutzers wird über den Folgen Button auf dessen Profil realisiert. Man kann das Profil betrachten und wenn einem die dort dargestellten Posts gefallen, kann man dem User folgen. Auf dem Profil wird dann auch direkt dargestellt, wie viele Benutzer dem Profilbenutzer folgen, und wie vielen Nutzern dieser folgt. Hierüber kann man auch feststellen, ob ein Profil beliebt ist, oder nicht.
 
 \subsection{Suche von Nutzern}
-Über die Suche in der Menüleiste kann man User suchen. Wir haben uns dafür entschieden, dass automatisch eine sog. \texttt{Fuzzy-Suche} gestartet wird, also die ersten Buchstaben eine Benutzers ausreichen, um diesen zu finden. Die Suche erfolgt über einen \texttt{GET}-Request. Im Anschluss wird die Ergebnis-Liste ausgegeben, bei der die Profile mit den Namen und Bildern angezeigt werden. Klickt man auf den Namen, kommt man auf das Profil des entsprechenden Benutzers.
+Über die Suche in der Menüleiste kann man User suchen. Wir haben uns dafür entschieden, dass automatisch eine sogenannte \texttt{Fuzzy-Suche} gestartet wird; also die ersten Buchstaben eine Benutzers ausreichen, um diesen zu finden. Die Suche erfolgt über einen \texttt{GET}-Request. Im Anschluss wird die Ergebnis-Liste ausgegeben, bei der die Profile mit den Namen und Bildern angezeigt werden. Klickt man auf den Namen, kommt man auf das Profil des entsprechenden Benutzers.
