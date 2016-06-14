@@ -4,9 +4,13 @@ package de.hska.lkit.demo.web.controller;
  * Created by Tobias Kerst on 01.06.16.
  */
 
+import de.hska.lkit.demo.web.model.Greeting;
+import de.hska.lkit.demo.web.model.HelloMessage;
 import de.hska.lkit.demo.web.persistency.Persistency;
 import de.hska.lkit.demo.web.model.post.Post;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -57,4 +61,14 @@ public class PostController {
         persistency.createPost(post, username);
         return "redirect:./timeline";
     }
+
+    @MessageMapping("/hello")
+    @SendTo("/topic/greetings")
+    public Greeting greeting(HelloMessage message) throws Exception {
+        System.out.println("In Websocket Controller.");
+        Thread.sleep(3000); // simulated delay
+        return new Greeting("Hello, " + message.getName() + "!");
+    }
+
+
 }
