@@ -5,9 +5,8 @@ package de.hska.lkit.demo.web.controller;
  */
 
 import de.hska.lkit.demo.web.model.Greeting;
-import de.hska.lkit.demo.web.model.Message;
+import de.hska.lkit.demo.web.model.post.Message;
 import de.hska.lkit.demo.web.persistency.Persistency;
-import de.hska.lkit.demo.web.model.post.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -32,33 +31,27 @@ public class PostController {
 
 
     @RequestMapping(value = "/create-post", method = RequestMethod.GET)
-    public String showPostForm(@ModelAttribute Post post, HttpSession session, Model model) {
+    public String showPostForm(@ModelAttribute Message message, HttpSession session, Model model) {
         if (session == null || session.getAttribute("username") == null) {
             return "redirect:./login";
         }
 
-        if (post == null) {
-            System.out.println("Post object is null");
-            post = new Post();
-        }
-
-        String username = session.getAttribute("username").toString();
         return "create-post";
     }
 
     @RequestMapping(value = "/create-post", method = RequestMethod.POST)
-    public String createPost(@ModelAttribute Post post, HttpSession session, Model model) {
+    public String createPost(@ModelAttribute Message message, HttpSession session, Model model) {
         if (session == null || session.getAttribute("username") == null) {
             return "redirect:./login";
         }
         String username = session.getAttribute("username").toString();
 
-        if (post.getContent().length() >= 140) {
-            model.addAttribute("error", "Dein Post ist länger als 140 Zeichen (" + post.getContent().length() + "" +
+        if (message.getContent().length() >= 140) {
+            model.addAttribute("error", "Dein Post ist länger als 140 Zeichen (" + message.getContent().length() + "" +
                     " Zeichen). Bitte  halte dich etwas kürzer!");
             return "./create-post";
         }
-        persistency.createPost(post, username);
+        persistency.createPost(message, username);
         return "redirect:./timeline";
     }
 
