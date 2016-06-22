@@ -34,9 +34,9 @@
             console.log("Disconnected");
         }
 
-        function sendName() {
-            var name = document.getElementById('name').value;
-            stompClient.send("/app/hello", {}, JSON.stringify({ 'name': name }));
+        function sendContent() {
+            var content = document.getElementById('content').value;
+            stompClient.send("/app/hello", {}, JSON.stringify({ 'content': content}));
         }
 
         function showGreeting(message) {
@@ -57,8 +57,8 @@
         <button id="disconnect" disabled="disabled" onclick="disconnect();">Disconnect</button>
     </div>
     <div id="conversationDiv">
-        <label>What is your name?</label><input type="text" id="name" />
-        <button id="sendName" onclick="sendName();">Send</button>
+        <label>What is your name?</label><input type="text" id="content" />
+        <button id="sendContent" onclick="sendContent();">Send</button>
         <p id="response"></p>
     </div>
 </div>

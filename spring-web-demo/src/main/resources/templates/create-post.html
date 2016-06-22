@@ -68,7 +68,7 @@
           </div>
             <div class="create-post-container">
               <div class="form-group">
-                <form class="form-signin" th:action="@{/create-post}" th:object="${post}" method="post">
+                <form class="form-signin" th:action="@{/create-post}" th:object="${message}" method="post">
                 <label for="comment">Post schreiben:</label>
                 <textarea class="form-control" rows="5" th:field="*{content}" id="comment"></textarea>
                 <button class="btn btn-primary btn-lg btn-block submit send" type="submit" style="margin-top: 20px;">Abschicken</button>
