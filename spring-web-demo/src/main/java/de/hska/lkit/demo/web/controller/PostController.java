@@ -58,8 +58,6 @@ public class PostController {
     @MessageMapping("/hello")
     @SendTo("/topic/greetings")
     public Greeting greeting(Message message) throws Exception {
-        System.out.println("In Websocket Controller.");
-        Thread.sleep(3000); // simulated delay
         return new Greeting("Hello, " + message.getContent() + "!");
     }
 
