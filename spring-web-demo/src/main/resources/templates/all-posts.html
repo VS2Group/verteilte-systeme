@@ -22,8 +22,9 @@
 
     <script th:src="@{/scripts/stomp.js}"></script>
     <script th:src="@{/scripts/sockjs-0.3.4.js}"></script>
+    <script th:src="@{/scripts/websock-connection.js}"></script>
   </head>
-  <body>
+  <body onload="connect()">
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
@@ -45,7 +46,7 @@
             </li>
             <li class="active"><a href="./timeline">Alle Posts</a></li>
             <li><a href="./timeline/my-stream">Mein Stream</a></li>
-            <li><a href="./logout">Logout</a></li>
+            <li><a href="./logout" onclick="disconnect()">Logout</a></li>
           </ul>
           <form class="navbar-form navbar-right" th:action="@{/search}" th:object="${string}" method="get">
             <div class="input-group">

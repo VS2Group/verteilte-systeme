@@ -21,8 +21,9 @@
     <link th:href="@{/css/posts.css}" rel="stylesheet"/>
     <script th:src="@{/scripts/stomp.js}"></script>
     <script th:src="@{/scripts/sockjs-0.3.4.js}"></script>
+    <script th:src="@{/scripts/websock-connection.js}"></script>
   </head>
-  <body>
+  <body onload="connect()">
 
     <nav class="navbar navbar-inverse navbar-fixed-top">
       <div class="container-fluid">
