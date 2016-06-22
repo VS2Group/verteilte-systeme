@@ -21,3 +21,8 @@ function disconnect() {
     }
     console.log("Disconnected");
 }
+
+function sendContent() {
+    var content = document.getElementById('content').value;
+    stompClient.send("/app/hello", {}, JSON.stringify({ 'content': content}));
+}
