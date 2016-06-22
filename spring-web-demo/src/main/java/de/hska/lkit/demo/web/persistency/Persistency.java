@@ -4,6 +4,7 @@ package de.hska.lkit.demo.web.persistency;
  * Created by patrickkoenig on 29.05.16.
  */
 
+import de.hska.lkit.demo.web.model.post.Message;
 import de.hska.lkit.demo.web.model.post.Post;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.*;
@@ -106,8 +107,10 @@ public class Persistency {
         return myStreamPosts;
     }
 
-    public void createPost(Post post, String username) {
+    public void createPost(Message message, String username) {
 
+        Post post = new Post();
+        post.setContent(message.getContent());
         // generate a unique id
         long realID = postid.incrementAndGet();
         String id = String.valueOf(realID);
