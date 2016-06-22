@@ -10,7 +10,9 @@ a:hover {
   text-decoration: none;
 }
 
-
+#notification {
+  display: none;
+}
 
 /* Custom default button */
 .btn-default,
