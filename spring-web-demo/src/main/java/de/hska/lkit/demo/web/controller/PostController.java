@@ -5,7 +5,7 @@ package de.hska.lkit.demo.web.controller;
  */
 
 import de.hska.lkit.demo.web.model.Greeting;
-import de.hska.lkit.demo.web.model.HelloMessage;
+import de.hska.lkit.demo.web.model.Message;
 import de.hska.lkit.demo.web.persistency.Persistency;
 import de.hska.lkit.demo.web.model.post.Post;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,10 +64,10 @@ public class PostController {
 
     @MessageMapping("/hello")
     @SendTo("/topic/greetings")
-    public Greeting greeting(HelloMessage message) throws Exception {
+    public Greeting greeting(Message message) throws Exception {
         System.out.println("In Websocket Controller.");
         Thread.sleep(3000); // simulated delay
-        return new Greeting("Hello, " + message.getName() + "!");
+        return new Greeting("Hello, " + message.getContent() + "!");
     }
 
 
