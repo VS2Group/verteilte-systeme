@@ -25,3 +25,10 @@ Beim Logout wird die Websocket-Verbindung getrennt und somit können keine weite
 \subsection{Austausch von Updatenachrichten zwischen
 Serverinstanzen}
 \paragraph{Austausch über Redis Publish-Subscribe-Messaging}
+Der Redis Pub-Sub Mechanismus implementiert ein Messaging-System, bei dem Publisher Nachrichten
+über einen so genannten Channel senden können. Ein Redis Client kann eine beliebige Anzahl solcher Channels
+abonnieren, um dort veröffentlichte Messages automatisch zu empfangen. Will ein Client die Nachrichten eines Channels
+nicht mehr empfangen, so kann er diesen deabonnieren (Unsubscribe).
+Für die Konfiguration unserer Anwendung, um diesen Mechanismus umzusetzen, werden in Spring, zusätzlich zu den Beans RedisTemplate und Connectionfactory,
+die Beans ChannelTopic, MessageListener und RedisPublisher benötigt. Über die Annotation @Schedule kann festgelegt werden, in welchem
+Zeitabstand neue Messages vom Publisher veröffentlicht werden.
