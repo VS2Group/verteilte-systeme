@@ -1,7 +1,27 @@
 \chapter{Asynchrone Erweiterungen}
 \section{Überblick der Implementierung}
-\subsection{Push-Funktionalität zwischen Webserver und -client}
-\paragraph{Implementierung mithilfe STOMP-over-WebSocket}
+\subsection{Push-Funktionalität zwischen Webserver und --client}
+\paragraph{Implementierung mithilfe von STOMP--over--WebSocket}
+Zur Realisierung der Websocket Funktionalitäten haben wir die \texttt{Sock.js} und \texttt{Stomp.js} JavaScript Libraries in unser Projekt eingebunden. Zusätzlich mussten zusätzlich noch Dependencies in Maven anpassen, sodass die entsprechenden Klassen benutzt werden können.
+\begin{verbatim}
+<dependency>
+    <groupId>org.springframework.boot</groupId>k
+    <artifactId>spring-boot-starter-websocket</artifactId>
+</dependency>
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-messaging</artifactId>
+</dependency>
+\end{verbatim}
+
+Auf jeder Seite, die Benachrichtigungen über neue Posts anzeigen soll, wurde dann über Javascript eine Socket Verbindung aufgebaut (mittels der \texttt{connect()} Methode aus dem Beispiel) und somit wurde dann der \texttt{Subscribe}--Mechanismus implementiert.\\
+Der \texttt{Publish}--Mechanismus wurde in der HTML Seite, die zum Posten von neuen Nachrichten erstellt wurde, implementiert. Hier wird ein \texttt{JSON-Objekt} vor dem Abschicken an den Server per \texttt{AJAX} geschickt. Dieser Request wird von einem speziellen Controller verarbeitet und hierüber werden dann die abonnierenden Clients informiert.
+
+Die Darstellung erfolgt über eine \texttt{Notification}, die anzeigt, wie viele neue Posts seit dem Aktualisieren eingagengen sind. Hierbei wird bei jeder ankommenden Nachricht geguckt, wie viele Nachrichten bisher eingangen ist und die Anzahl wird erhöht.
+
+Beim Logout wird die Websocket-Verbindung getrennt und somit können keine weiteren Nachrichten empfangen werden.
+
+%TODO: Lena, bitte hier einen Screenshot der Notification einfügen.
 \subsection{Austausch von Updatenachrichten zwischen
 Serverinstanzen}
 \paragraph{Austausch über Redis Publish-Subscribe-Messaging}
