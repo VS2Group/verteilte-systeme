@@ -15,8 +15,14 @@ Zur Realisierung der Websocket Funktionalitäten haben wir die \texttt{Sock.js} 
 \end{verbatim}
 
 Auf jeder Seite, die Benachrichtigungen über neue Posts anzeigen soll, wurde dann über Javascript eine Socket Verbindung aufgebaut (mittels der \texttt{connect()} Methode aus dem Beispiel) und somit wurde dann der \texttt{Subscribe}--Mechanismus implementiert.\\
-Der \texttt{Publish}--Mechanismus wurde in der HTML Seite, die zum Posten von neuen Nachrichten erstellt wurde, implementiert. Hier wird ein \texttt{JSON-Objekt} vor dem Abschicken an den Server per \texttt{AJAX} geschickt. Dieser Request wird von einem speziellen Controller verarbeitet und hierüber werden dann die abonnierenden Clients informiert.
+Der \texttt{Publish}--Mechanismus wurde in der HTML Seite, die zum Posten von neuen Nachrichten erstellt wurde, implementiert. Hier wird ein \texttt{JSON-Objekt} vor dem Abschicken an den Server per \texttt{AJAX} geschickt. Dieser Request wird von einem speziellen Controller verarbeitet und hierüber werden dann die abonnierenden Clients informiert. Dieser Controller wird mit den folgenden \texttt{Annotations} versehen.
 
+\begin{verbatim}
+@MessageMapping("/hello")
+@SendTo("/topic/greetings")
+\end{verbatim}
+
+\paragraph{Darstellung neuer Nachrichten}
 Die Darstellung erfolgt über eine \texttt{Notification}, die anzeigt, wie viele neue Posts seit dem Aktualisieren eingagengen sind. Hierbei wird bei jeder ankommenden Nachricht geguckt, wie viele Nachrichten bisher eingangen ist und die Anzahl wird erhöht.
 
 Beim Logout wird die Websocket-Verbindung getrennt und somit können keine weiteren Nachrichten empfangen werden.
